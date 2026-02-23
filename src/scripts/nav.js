@@ -4,6 +4,10 @@ function handleScroll() {
     const nav = document.getElementById('main-nav');
     if (!nav) return;
 
+    // Don't run pill logic on mobile
+    if (window.innerWidth <= 768) return;
+
+
     const currentScrollY = window.scrollY;
 
     // Don't hide/show if menu is open
