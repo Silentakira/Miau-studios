@@ -1,15 +1,21 @@
 ---
 ---
+
 <section id="community" class="community">
-  <div class="container community-container">
-    <div class="section-label">THE COMMUNITY</div>
-    <h2 class="display-text reveal-split">Come hang with us</h2>
-    <p>We build in public, share the process, and actually talk to our players. Join the community.</p>
-    <div class="community-actions">
+  <div class="community-container">
+    <div class="section-label reveal">THE COMMUNITY</div>
+    <div class="title-stack">
+      <h2 class="title-outline" aria-hidden="true">Come hang with us</h2>
+      <h2 class="title-filled display-text reveal-split">Come hang with us</h2>
+    </div>
+    <p class="reveal">
+      We build in public, share the process, and actually talk to our players.
+      Join the community.
+    </p>
+    <div class="community-actions reveal">
       <div class="magnet-wrap">
-        <a href="#" class="btn btn-filled magnetic cursor-interact" data-cursor="VIEW"
-           style="background: var(--black); color: var(--white); border-color: var(--black);">
-           Join Discord
+        <a href="#" class="btn magnetic cursor-interact" data-cursor="VIEW">
+          Join Discord
         </a>
       </div>
     </div>
@@ -21,38 +27,95 @@
     text-align: center;
     background-color: transparent;
     transition: background-color 0.8s ease;
+    padding-inline: var(--padding-x);
+    padding-block: clamp(64px, 10vw, 140px);
+    overflow: hidden;
   }
 
   :global(.community.active-bg) {
     background-color: var(--yellow);
   }
 
-  h2 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
+  .community-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* LAYERED TITLE */
+  .title-stack {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block: 8px;
+  }
+
+  .title-outline {
+    position: absolute;
+    font-family: var(--font-heading);
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.2);
+    transform: translate(8px, 8px);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .title-filled {
+    position: relative;
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 0;
+    z-index: 1;
+    white-space: nowrap;
   }
 
   p {
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    color: #444;
+    font-size: 1.1rem;
+    max-width: 500px;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
   }
 
   .community-actions {
-      display: flex;
-      justify-content: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
   }
 
   @media (max-width: 768px) {
-    .community {
-      padding-block: 80px;
+    .title-outline,
+    .title-filled {
+      font-size: clamp(36px, 11vw, 64px);
+      white-space: normal;
+      text-align: center;
+    }
+
+    .title-outline {
+      transform: translate(5px, 5px);
+    }
+
+    p {
+      max-width: 100%;
     }
 
     .community-actions {
       flex-direction: column;
       align-items: center;
-      gap: 12px;
       width: 100%;
     }
 
