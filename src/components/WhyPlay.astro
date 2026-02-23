@@ -1,0 +1,103 @@
+---
+---
+<section class="why-play container">
+  <div class="grid-2 reveal-stagger">
+    <div class="interactive-card card-yellow cursor-interact" data-cursor="VIEW">
+      <div class="card-spotlight"></div>
+      <h3>Spreading Creativity</h3>
+      <p>Every pixel is intentional. Every frame is hand-tweaked. We build worlds that feel tactile, responsive, and unapologetically bold.</p>
+    </div>
+    <div class="interactive-card card-blue cursor-interact" data-cursor="VIEW">
+      <div class="card-spotlight"></div>
+      <h3>Community Interaction</h3>
+      <p>Games aren't built in a vacuum. Our community is our co-op partner. We build out in the open, breaking things together until they're perfect.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-play {
+    padding-top: 2rem;
+    padding-bottom: clamp(64px, 10vw, 140px);
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 3vw, 3rem);
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+
+  .interactive-card {
+    background: var(--white);
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    cursor: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
+  }
+
+  .interactive-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: 2;
+    transition: transform 0.3s ease;
+  }
+
+  .card-yellow::before { background-color: var(--yellow); }
+  .card-blue::before { background-color: var(--blue); }
+
+  .interactive-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .interactive-card p {
+    position: relative;
+    z-index: 2;
+  }
+
+  :global(.card-spotlight) {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    mix-blend-mode: overlay;
+    background: radial-gradient(circle 250px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 80%);
+    transition: opacity 0.4s;
+  }
+
+  @media (max-width: 1024px) {
+    .grid-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grid-2 {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .interactive-card:active {
+      transform: scale(1.02);
+      box-shadow: 4px 4px 0 var(--yellow) !important;
+    }
+  }
+</style>
+
+<script src="../scripts/cards.js"></script>

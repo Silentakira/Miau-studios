@@ -1,0 +1,49 @@
+---
+---
+<section id="about" class="about container">
+  <div class="section-header reveal-stagger">
+    <h2 class="reveal-split">Quietly confident.</h2>
+    <h2 class="reveal-split">Secretly feral.</h2>
+    <p class="reveal">We believe in building games that feel alive before you even hit start. Digital comfort food laced with neon and adrenaline. We don't just polish; we give it teeth.</p>
+  </div>
+</section>
+
+<style>
+  .about h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .about h2 {
+      font-size: clamp(32px, 9vw, 52px);
+    }
+
+    /* Cards stack naturally because they are not grid yet, but let's be sure */
+    .section-header {
+        text-align: center;
+    }
+  }
+
+  .about {
+    padding-top: clamp(64px, 10vw, 140px);
+    padding-bottom: 0; /* Let WhyPlay pick up the rest */
+  }
+
+  .section-header {
+    max-width: 1200px;
+    margin-inline: auto;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    color: #444;
+  }
+</style>

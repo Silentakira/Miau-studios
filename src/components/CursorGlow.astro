@@ -1,0 +1,82 @@
+---
+---
+<div id="custom-cursor">
+  <span id="cursor-label"></span>
+</div>
+
+<div id="cursor-glow"></div>
+
+<style>
+  #custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #000000;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-100px, -100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+    will-change: transform;
+    opacity: 0;
+  }
+
+  #cursor-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #000;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  :global(#custom-cursor.hovering) {
+    width: 80px;
+    height: 80px;
+    background: #FD82CB;
+    border: none !important;
+  }
+
+  :global(#custom-cursor.hovering #cursor-label) {
+    opacity: 1;
+  }
+
+  #cursor-glow {
+    position: fixed;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(253, 130, 203, 0.18) 0%,
+      rgba(77, 186, 253, 0.10) 35%,
+      rgba(255, 225, 0, 0.05) 60%,
+      transparent 70%
+    );
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  @media (pointer: coarse) {
+    #custom-cursor, #cursor-glow {
+      display: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+      #custom-cursor, #cursor-glow {
+          display: none !important;
+      }
+  }
+</style>
+
+<script src="../scripts/cursor.js"></script>

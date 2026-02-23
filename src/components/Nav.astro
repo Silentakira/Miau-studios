@@ -1,0 +1,178 @@
+---
+---
+<nav id="main-nav">
+  <div class="logo cursor-interact" data-cursor="VIEW">Miau Studio</div>
+  
+  <button class="mobile-toggle hamburger" aria-label="Toggle Menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <div class="nav-links">
+    <a href="#about" class="cursor-interact" data-cursor="GO">About</a>
+    <a href="#game" class="cursor-interact" data-cursor="GO">Skate Beats</a>
+    <a href="#team" class="cursor-interact" data-cursor="GO">Team</a>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%) translateY(0);
+    padding: 2rem var(--padding-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+    color: var(--white);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 5px;
+    overflow: hidden;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background-color: var(--yellow);
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .nav-links a:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* PILL STATE */
+  :global(nav.nav-pill) {
+    top: 20px;
+    width: calc(100% - 40px);
+    max-width: 800px;
+    border-radius: 999px;
+    border: var(--border);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 10px 30px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    mix-blend-mode: normal;
+    color: var(--black);
+  }
+
+  :global(nav.nav-pill .nav-links a) {
+    color: var(--black);
+  }
+
+  :global(nav.nav-hidden) {
+    transform: translateX(-50%) translateY(-150%);
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .bar {
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transition: all 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+    transform-origin: center;
+  }
+
+  /* HAMBURGER ANIMATION */
+  :global(.mobile-toggle.open .bar:nth-child(1)) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  :global(.mobile-toggle.open .bar:nth-child(2)) {
+    opacity: 0;
+  }
+  :global(.mobile-toggle.open .bar:nth-child(3)) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      flex-wrap: wrap;
+      padding: 1rem var(--padding-x);
+      mix-blend-mode: normal;
+      background: var(--white);
+      color: var(--black);
+      border-bottom: var(--border);
+      gap: 1rem;
+    }
+
+    :global(nav.nav-pill) {
+        max-width: none;
+        width: calc(100% - 40px);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-top: var(--border);
+      order: 3;
+    }
+
+    :global(.nav-links.open) {
+      display: flex;
+    }
+
+    .nav-links a {
+        color: var(--black);
+        font-size: 1.25rem;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    /* Override pill nav for mobile when open */
+    :global(nav.nav-pill .nav-links) {
+        background: transparent;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        padding-top: 1rem;
+    }
+  }
+</style>
+
+<script src="../scripts/nav.js"></script>

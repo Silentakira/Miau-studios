@@ -1,0 +1,259 @@
+:root {
+    --white: #FFFFFF;
+    --black: #000000;
+    --yellow: #FFE100;
+    --pink: #FD82CB;
+    --blue: #4DBAFD;
+    --font-heading: "-apple-system", "SF Pro Rounded", system-ui, sans-serif;
+    --font-body: "Montserrat", sans-serif;
+    --padding-x: clamp(24px, 6vw, 120px);
+    --border: 1px solid var(--black);
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.5vw, 18px);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    cursor: none !important;
+}
+
+a,
+button,
+.cursor-interact {
+    cursor: none !important;
+}
+
+/* TYPOGRAPHY */
+h1,
+h2,
+h3,
+h4,
+.display-text {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: clamp(42px, 8vw, 110px);
+}
+
+h2 {
+    font-size: clamp(28px, 5vw, 64px);
+}
+
+p {
+    line-height: 1.6;
+    overflow-wrap: break-word;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--padding-x);
+}
+
+section {
+    padding-block: clamp(64px, 10vw, 140px);
+    padding-inline: var(--padding-x);
+    position: relative;
+    z-index: 1;
+}
+
+/* Universal Border Rule */
+.interactive-card,
+.blog-card,
+.profile-img-wrap,
+.btn,
+.nav-pill,
+.sound-toggle,
+.blog-thumbnail {
+    border: var(--border) !important;
+}
+
+/* BUTTONS */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 2.5rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: var(--border);
+}
+
+.btn-outline {
+    color: var(--black);
+    background: transparent;
+}
+
+.btn-filled {
+    background: var(--pink);
+    color: var(--black);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--black);
+        z-index: -1;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .btn:hover::before {
+        transform: scaleY(1);
+    }
+
+    .btn:hover {
+        color: var(--white);
+    }
+}
+
+/* REVEAL WRAPPERS */
+.reveal-split {
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+.split-hidden {
+    display: block;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+}
+
+.split-top,
+.split-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    line-height: inherit;
+    display: flex;
+}
+
+.split-top {
+    top: 0;
+    transform: translateY(-100%);
+    align-items: flex-start;
+}
+
+.split-bottom {
+    bottom: 0;
+    transform: translateY(100%);
+    align-items: flex-end;
+}
+
+.reveal-split.active .split-top,
+.reveal-split.active .split-bottom {
+    transform: translateY(0);
+}
+
+/* Stagger & Basic Reveal */
+.reveal,
+.reveal-stagger>* {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active,
+.reveal-stagger.active>* {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ACCESSIBILITY & MOBILE GLOBAL */
+@media (max-width: 768px) {
+    :root {
+        --padding-x: 20px;
+    }
+
+    * {
+        cursor: auto !important;
+        /* Restore default cursor on mobile */
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .split-hidden {
+        opacity: 1 !important;
+    }
+
+    .split-top,
+    .split-bottom {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .reveal {
+        transform: translateY(24px);
+        /* Softened from 30px */
+    }
+
+    .split-top {
+        transform: translateY(-20px);
+    }
+
+    .split-bottom {
+        transform: translateY(20px);
+    }
+
+    /* Reset active state to confirm they reach 0 */
+    .reveal-split.active .split-top,
+    .reveal-split.active .split-bottom {
+        transform: translateY(0);
+    }
+
+    /* Global Tap Feedback for Cards */
+    .interactive-card:active {
+        transform: scale(1.02);
+        box-shadow: 4px 4px 0 var(--yellow) !important;
+    }
+}

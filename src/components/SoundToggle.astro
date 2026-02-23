@@ -1,0 +1,47 @@
+---
+---
+<button id="soundToggle" class="sound-toggle cursor-interact" data-cursor="VIEW">
+  🔇 Sound
+</button>
+
+<audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
+
+<style>
+  .sound-toggle {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--black);
+    color: var(--white);
+    border: var(--border);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.3s, background 0.3s, color 0.3s;
+  }
+
+  :global(.sound-toggle.playing) {
+    animation: soundPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes soundPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @media (max-width: 768px) {
+    .sound-toggle {
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        left: 16px;
+        right: auto; /* move from right to left as per prompt */
+        width: 48px;
+        height: 48px;
+    }
+  }
+</style>
+
+<script src="../scripts/soundToggle.js"></script>

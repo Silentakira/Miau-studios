@@ -1,0 +1,118 @@
+---
+---
+<section id="game" class="game-section cursor-interact" data-cursor="PLAY">
+  <canvas id="game-bg-canvas"></canvas>
+  <div class="game-tint"></div>
+  <div class="game-content container">
+    <div class="game-logo-container">
+      <div class="game-logo-large">SKATE<br />BEATS</div>
+    </div>
+    <h2 class="game-headline">Where Tony Hawk meets <span class="accent-pink">Beat Saber</span>.</h2>
+    <p class="game-tagline">Pop-shove to pop music. Grind rails to the bassline. Dive into neon-soaked streets that organically reconstruct to the rhythm. It never plays the same way twice.</p>
+    <div class="game-cta">
+      <a href="#" class="btn btn-filled cursor-interact" data-cursor="WISHLIST" style="border-color: var(--pink)">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .game-section {
+    background-color: var(--black);
+    color: var(--white);
+    padding: clamp(64px, 15vw, 240px) 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  #game-bg-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .game-tint {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.15;
+    z-index: 0;
+    background: linear-gradient(90deg, rgba(253, 130, 203, var(--tint-opacity, 0.15)) 0%, rgba(77, 186, 253, var(--tint-opacity, 0.15)) 100%);
+    transition: background 0.1s;
+  }
+
+  .game-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .game-logo-container {
+    margin-bottom: 2rem;
+  }
+
+  .game-logo-large {
+    font-family: var(--font-heading);
+    font-size: clamp(5rem, 15vw, 12rem);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--white);
+    display: inline-block;
+  }
+
+  .game-headline {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    max-width: 900px;
+    margin: 0 auto 4rem;
+  }
+
+  .accent-pink {
+    color: var(--pink);
+  }
+
+  .game-tagline {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    color: #999;
+  }
+
+  @media (max-width: 768px) {
+    .game-section {
+      padding-inline: var(--padding-x);
+      padding-block: clamp(60px, 15vw, 100px);
+      text-align: center;
+    }
+
+    .game-headline {
+      font-size: clamp(28px, 8vw, 52px);
+    }
+
+    #game-bg-canvas {
+      opacity: 0.6; /* reduce Three.js prominence on mobile */
+    }
+
+    .game-logo-large {
+        font-size: 15vw;
+    }
+  }
+</style>
+
+<script>
+  // Tint Logic
+  const gameSect = document.getElementById('game');
+  const gameTint = document.querySelector('.game-tint');
+  if (gameSect && gameTint) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      gameSect.addEventListener('mousemove', (e) => {
+        const ratio = e.clientX / window.innerWidth;
+        const opacity = Math.min(ratio * 0.3, 0.3);
+        gameTint.style.setProperty('--tint-opacity', opacity.toString());
+      });
+    }
+  }
+</script>
+<script src="../scripts/threejs-game.js"></script>

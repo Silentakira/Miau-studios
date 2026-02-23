@@ -1,0 +1,81 @@
+---
+---
+<div id="loader">
+  <div class="loader-logo">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<style>
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--white);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loader-logo {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    display: flex;
+    gap: 4px;
+  }
+
+  :global(.loader-char) {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #loader {
+      transition: opacity 0.5s ease, transform 0.5s ease 0.5s;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    :global(.loader-char) {
+      animation: loaderAssemble 0.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  }
+
+  @keyframes loaderAssemble {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+    const logoContainer = loader.querySelector('.loader-logo');
+    const logoText = "MIAU";
+    
+    logoText.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.className = 'loader-char';
+      span.innerText = char;
+      span.style.animationDelay = `${i * 0.1}s`;
+      logoContainer?.appendChild(span);
+    });
+
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      setTimeout(() => loader.remove(), 1000);
+    }, 1000);
+  });
+</script>
