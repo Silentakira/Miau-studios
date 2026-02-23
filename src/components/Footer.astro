@@ -1,20 +1,49 @@
 ---
 ---
+
 <footer class="dark-section">
   <div class="marquee-wrap">
     <div class="marquee">
-      <span>Digital comfort food.</span><span class="yellow-txt">Secretly feral.</span>
-      <span>Digital comfort food.</span><span class="yellow-txt">Secretly feral.</span>
-      <span>Digital comfort food.</span><span class="yellow-txt">Secretly feral.</span>
-      <span>Digital comfort food.</span><span class="yellow-txt">Secretly feral.</span>
+      <span>Digital comfort food.</span><span class="yellow-txt"
+        >Secretly feral.</span
+      >
+      <span>Digital comfort food.</span><span class="yellow-txt"
+        >Secretly feral.</span
+      >
+      <span>Digital comfort food.</span><span class="yellow-txt"
+        >Secretly feral.</span
+      >
+      <span>Digital comfort food.</span><span class="yellow-txt"
+        >Secretly feral.</span
+      >
     </div>
   </div>
 
   <div class="footer-middle container">
-    <a href="#" class="social-link cursor-interact" data-cursor="VIEW" data-emoji="📸">Instagram</a>
-    <a href="#" class="social-link cursor-interact" data-cursor="VIEW" data-emoji="🎵">TikTok</a>
-    <a href="#" class="social-link cursor-interact" data-cursor="VIEW" data-emoji="🐦">Twitter</a>
-    <a href="#" class="social-link cursor-interact" data-cursor="VIEW" data-emoji="🎮">Discord</a>
+    <a
+      href="#"
+      class="social-link cursor-interact"
+      data-cursor="VIEW"
+      data-emoji="📸">Instagram</a
+    >
+    <a
+      href="#"
+      class="social-link cursor-interact"
+      data-cursor="VIEW"
+      data-emoji="🎵">TikTok</a
+    >
+    <a
+      href="#"
+      class="social-link cursor-interact"
+      data-cursor="VIEW"
+      data-emoji="🐦">Twitter</a
+    >
+    <a
+      href="#"
+      class="social-link cursor-interact"
+      data-cursor="VIEW"
+      data-emoji="🎮">Discord</a
+    >
   </div>
 
   <div class="footer-bottom">
@@ -38,6 +67,7 @@
     overflow: hidden;
     display: flex;
     white-space: nowrap;
+    touch-action: pan-y; /* only allow vertical touch, not horizontal */
   }
 
   .marquee {
@@ -55,8 +85,12 @@
   }
 
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .marquee span {
@@ -102,8 +136,14 @@
   }
 
   @keyframes floatUpEmoji {
-    0% { transform: translate(-50%, 0); opacity: 1; }
-    100% { transform: translate(-50%, -40px) scale(1.2); opacity: 0; }
+    0% {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -40px) scale(1.2);
+      opacity: 0;
+    }
   }
 
   .footer-bottom {
@@ -140,9 +180,15 @@
   @media (max-width: 768px) {
     .marquee {
       font-size: clamp(20px, 6vw, 32px);
+      animation-duration: 12s;
+      transform: translateZ(0); /* force GPU */
+      backface-visibility: hidden;
+      will-change: transform;
     }
-    .marquee {
-        animation-duration: 12s; /* faster on mobile */
+
+    .marquee-wrap {
+      pointer-events: none; /* stop touch events interfering */
+      touch-action: pan-y;
     }
 
     .footer-main {
@@ -163,26 +209,28 @@
     }
 
     .footer-bottom {
-        padding: 2rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
+      padding: 2rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
     }
   }
 </style>
 
 <script>
   // Emoji Float
-  document.querySelectorAll('.social-link').forEach(link => {
-    link.addEventListener('mouseenter', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll(".social-link").forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
       if (prefersReducedMotion) return;
 
-      const emoji = link.getAttribute('data-emoji');
+      const emoji = link.getAttribute("data-emoji");
       if (!emoji) return;
 
-      const span = document.createElement('span');
-      span.className = 'floating-emoji';
+      const span = document.createElement("span");
+      span.className = "floating-emoji";
       span.innerText = emoji;
       link.appendChild(span);
 
