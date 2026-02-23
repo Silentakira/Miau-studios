@@ -1,4 +1,5 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Reveal-split setup
@@ -17,12 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     });
 
-    // 2. Intersection Observer
-    const isTouchDevice = window.matchMedia('(hover: none)').matches;
+    // 2. Intersection Observers
     const isMobile = window.innerWidth < 768;
 
     const ioOptions = {
-        threshold: (isTouchDevice || isMobile) ? 0.1 : 0.15,
+        threshold: 0.1, // Consistently low for mobile stability
         rootMargin: "0px 0px -50px 0px"
     };
 
@@ -30,9 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
 
-            entry.target.classList.add('active');
+            // Trigger both for CSS safety
+            entry.target.classList.add('active', 'is-visible');
 
-            // Trigger children stagger
+            // Trigger children stagger for .active elements
             if (entry.target.classList.contains('reveal-stagger')) {
                 const children = entry.target.children;
                 for (let i = 0; i < children.length; i++) {
@@ -49,12 +50,96 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, ioOptions);
 
-    document.querySelectorAll('.reveal-split, .reveal-stagger, .reveal, #community').forEach(el => {
+    // Observe all possible animatable elements
+    const selectors = '.section-label, .interactive-card, .blog-card, .profile-img-wrap, .reveal, .reveal-split, .social-proof, #community, .reveal-stagger';
+
+    document.querySelectorAll(selectors).forEach(el => {
         observer.observe(el);
     });
 
-    // 3. Social Proof Counter
+    // 4. Game Title Letter Drop (Mobile Only)
+    if ((isTouchDevice || isMobile) && !prefersReducedMotion) {
+        const gameTitle = document.querySelector('.game-logo-large');
+        if (gameTitle && !gameTitle.dataset.lettersDone) {
+            gameTitle.dataset.lettersDone = "true";
+            // Process each child span (line)
+            const lines = Array.from(gameTitle.children);
+            const content = lines.map((line, lineIdx) => {
+                const text = line.textContent.trim();
+                const words = text.split(' ');
+                return `<div style="white-space: nowrap;">${words.map(word => {
+                    return word.split('').map((l, i) =>
+                        `<span class="letter" style="
+                            display: inline-block;
+                            opacity: 0;
+                            transform: translateY(-30px);
+                            transition: opacity 0.4s ease ${(lineIdx * 200) + (i * 40)}ms, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) ${(lineIdx * 200) + (i * 40)}ms
+                        ">${l}</span>`
+                    ).join('');
+                }).join('&nbsp;')}</div>`;
+            }).join('');
+
+            gameTitle.innerHTML = content;
+
+            const titleObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gameTitle.querySelectorAll('.letter').forEach(span => {
+                            span.style.opacity = '1';
+                            span.style.transform = 'translateY(0)';
+                        });
+                        titleObserver.unobserve(gameTitle);
+                    }
+                });
+            }, { threshold: 0.1 });
+            titleObserver.observe(gameTitle);
+        }
+    }
+
+    // 5. Community Background Pulse (Mobile Only)
+    if ((isTouchDevice || isMobile) && !prefersReducedMotion) {
+        const communitySection = document.querySelector('.community');
+        if (communitySection) {
+            const commObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Background becomes yellow immediately via CSS transition
+                        communitySection.style.backgroundColor = '#FFE100';
+                        setTimeout(() => {
+                            communitySection.style.transition = 'background-color 0.3s ease';
+                            communitySection.style.backgroundColor = '#FFD000'; // Saturate pulse
+                            setTimeout(() => {
+                                communitySection.style.backgroundColor = '#FFE100'; // Settle
+                            }, 300);
+                        }, 400);
+                        commObserver.unobserve(communitySection);
+                    }
+                });
+            }, { threshold: 0.5 });
+            commObserver.observe(communitySection);
+        }
+    }
+
+    // 6. Footer Marquee Speed (Mobile Only)
+    if (isTouchDevice && !prefersReducedMotion) {
+        let lastScrollY = window.scrollY;
+        let marqueeSpeed = 12;
+        const marqueeEl = document.querySelector('.marquee'); // Match the marquee element
+
+        window.addEventListener('scroll', () => {
+            const delta = Math.abs(window.scrollY - lastScrollY);
+            // faster scroll = lower duration = faster marquee
+            marqueeSpeed = Math.max(5, 12 - delta * 0.5);
+            if (marqueeEl) {
+                marqueeEl.style.animationDuration = `${marqueeSpeed}s`;
+            }
+            lastScrollY = window.scrollY;
+        }, { passive: true });
+    }
+
+    // 3. Social Proof Counter (With Mobile Pulse)
     const counterEl = document.getElementById('social-counter');
+    const socialProofRow = document.querySelector('.social-proof');
     let counted = false;
 
     if (counterEl) {
@@ -80,6 +165,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         requestAnimationFrame(step);
                     } else {
                         counterEl.innerText = finalValue.toLocaleString();
+
+                        // Mobile Counter Pulse
+                        if (isTouchDevice && socialProofRow) {
+                            socialProofRow.style.transition = 'transform 0.2s ease';
+                            socialProofRow.style.transform = 'scale(1.06)';
+                            setTimeout(() => {
+                                socialProofRow.style.transform = 'scale(1)';
+                            }, 200);
+                        }
                     }
                 };
                 requestAnimationFrame(step);

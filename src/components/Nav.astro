@@ -1,23 +1,23 @@
 ---
 ---
 <nav id="main-nav">
-  <div class="logo cursor-interact" data-cursor="VIEW">Miau Studio</div>
-  
-  <button class="mobile-toggle hamburger" aria-label="Toggle Menu">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </button>
-
-  <div class="nav-links">
-    <a href="#about" class="cursor-interact" data-cursor="GO">About</a>
-    <a href="#game" class="cursor-interact" data-cursor="GO">Skate Beats</a>
-    <a href="#team" class="cursor-interact" data-cursor="GO">Team</a>
+  <div class="nav-inner">
+    <div class="nav-logo">MIAU STUDIO</div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a href="#about">About</a>
+    <a href="#game">Skate Beats</a>
+    <a href="#team">Team</a>
   </div>
 </nav>
 
 <style>
-  nav {
+  #main-nav {
     position: fixed;
     top: 0;
     left: 50%;
@@ -27,13 +27,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    z-index: 1000;
     mix-blend-mode: difference;
     color: var(--white);
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .logo {
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .nav-logo {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 800;
@@ -47,130 +54,149 @@
   }
 
   .nav-links a {
-    color: var(--white);
+    color: inherit;
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
     position: relative;
     padding-bottom: 5px;
-    overflow: hidden;
   }
 
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -100%;
-    width: 100%;
-    height: 3px;
-    background-color: var(--yellow);
-    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
-  }
-
-  .nav-links a:hover::after {
-    transform: translateX(100%);
+  .hamburger {
+    display: none;
   }
 
   /* PILL STATE */
-  :global(nav.nav-pill) {
+  :global(#main-nav.nav-pill) {
     top: 20px;
     width: calc(100% - 40px);
     max-width: 800px;
     border-radius: 999px;
     border: var(--border);
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
-    padding: 10px 30px;
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2px 0; /* padding handled by nav-inner */
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    mix-blend-mode: normal;
-    color: var(--black);
+    mix-blend-mode: normal !important;
+    color: var(--black) !important;
+  }
+  
+  :global(#main-nav.nav-pill .nav-inner) {
+    padding: 10px 30px;
   }
 
-  :global(nav.nav-pill .nav-links a) {
-    color: var(--black);
-  }
-
-  :global(nav.nav-hidden) {
+  :global(#main-nav.nav-hidden) {
     transform: translateX(-50%) translateY(-150%);
   }
 
-  .mobile-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .bar {
-    width: 100%;
-    height: 2px;
-    background: currentColor;
-    transition: all 0.3s cubic-bezier(0.76, 0, 0.24, 1);
-    transform-origin: center;
-  }
-
-  /* HAMBURGER ANIMATION */
-  :global(.mobile-toggle.open .bar:nth-child(1)) {
-    transform: translateY(9px) rotate(45deg);
-  }
-  :global(.mobile-toggle.open .bar:nth-child(2)) {
-    opacity: 0;
-  }
-  :global(.mobile-toggle.open .bar:nth-child(3)) {
-    transform: translateY(-10px) rotate(-45deg);
+  @media (min-width: 769px) {
+    .nav-inner {
+        width: auto;
+        gap: 2rem;
+    }
+    .nav-inner {
+        justify-content: flex-start;
+    }
+    #main-nav {
+        justify-content: space-between;
+    }
+    .hamburger {
+        display: none !important;
+    }
   }
 
   @media (max-width: 768px) {
-    nav {
-      flex-wrap: wrap;
-      padding: 1rem var(--padding-x);
+    #main-nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid #000;
+      border-radius: 999px;
+      z-index: 1000;
+      overflow: hidden;
+      transition: border-radius 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+      display: block;
+      padding: 0;
       mix-blend-mode: normal;
-      background: var(--white);
-      color: var(--black);
-      border-bottom: var(--border);
-      gap: 1rem;
+      color: #000;
     }
 
-    :global(nav.nav-pill) {
-        max-width: none;
-        width: calc(100% - 40px);
-        left: 50%;
-        transform: translateX(-50%);
+    #main-nav.menu-open {
+      border-radius: 20px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
     }
 
     .nav-links {
       display: none;
       flex-direction: column;
-      width: 100%;
-      gap: 1.5rem;
-      padding: 1.5rem 0;
-      border-top: var(--border);
-      order: 3;
+      padding: 8px 20px 16px;
+      gap: 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
     }
 
-    :global(.nav-links.open) {
+    .nav-links.open {
       display: flex;
     }
 
     .nav-links a {
-        color: var(--black);
-        font-size: 1.25rem;
+      padding: 12px 0;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
-    .mobile-toggle {
+    .nav-links a:last-child {
+      border-bottom: none;
+    }
+
+    .hamburger {
       display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 24px;
+      height: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
     }
 
-    /* Override pill nav for mobile when open */
-    :global(nav.nav-pill .nav-links) {
-        background: transparent;
-        border-top: 1px solid rgba(0,0,0,0.1);
-        padding-top: 1rem;
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #000;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
   }
 </style>

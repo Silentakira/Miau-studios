@@ -5,7 +5,10 @@
   <div class="game-tint"></div>
   <div class="game-content container">
     <div class="game-logo-container">
-      <div class="game-logo-large">SKATE<br />BEATS</div>
+      <div class="game-logo-large game-title">
+        <span>SKATE</span>
+        <span>BEATS</span>
+      </div>
     </div>
     <h2 class="game-headline">Where Tony Hawk meets <span class="accent-pink">Beat Saber</span>.</h2>
     <p class="game-tagline">Pop-shove to pop music. Grind rails to the bassline. Dive into neon-soaked streets that organically reconstruct to the rhythm. It never plays the same way twice.</p>
@@ -59,7 +62,9 @@
     line-height: 0.8;
     letter-spacing: -0.05em;
     color: var(--white);
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .game-headline {
@@ -86,16 +91,31 @@
       text-align: center;
     }
 
+    .game-logo-large,
+    .game-title {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      visibility: visible !important;
+      opacity: 1;
+      font-size: clamp(56px, 18vw, 96px);
+      text-align: center;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+      line-height: 1;
+    }
+
     .game-headline {
       font-size: clamp(28px, 8vw, 52px);
     }
 
     #game-bg-canvas {
-      opacity: 0.6; /* reduce Three.js prominence on mobile */
+      opacity: 0.6;
+      z-index: 0;
     }
-
-    .game-logo-large {
-        font-size: 15vw;
+    
+    .game-content {
+      z-index: 1;
     }
   }
 </style>

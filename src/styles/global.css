@@ -49,6 +49,16 @@ h4,
     letter-spacing: -0.02em;
 }
 
+/* Global Label base */
+.section-label {
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
 h1 {
     font-size: clamp(42px, 8vw, 110px);
 }
@@ -81,7 +91,6 @@ section {
 .profile-img-wrap,
 .btn,
 .nav-pill,
-.sound-toggle,
 .blog-thumbnail {
     border: var(--border) !important;
 }
@@ -178,7 +187,9 @@ section {
 }
 
 .reveal-split.active .split-top,
-.reveal-split.active .split-bottom {
+.reveal-split.active .split-bottom,
+.reveal-split.is-visible .split-top,
+.reveal-split.is-visible .split-bottom {
     transform: translateY(0);
 }
 
@@ -247,7 +258,9 @@ section {
 
     /* Reset active state to confirm they reach 0 */
     .reveal-split.active .split-top,
-    .reveal-split.active .split-bottom {
+    .reveal-split.active .split-bottom,
+    .reveal-split.is-visible .split-top,
+    .reveal-split.is-visible .split-bottom {
         transform: translateY(0);
     }
 
@@ -255,5 +268,88 @@ section {
     .interactive-card:active {
         transform: scale(1.02);
         box-shadow: 4px 4px 0 var(--yellow) !important;
+    }
+
+    /* 1. Section Label Wipe */
+    .section-label {
+        display: inline-block;
+        /* Ensure clip-path works on the box */
+        clip-path: inset(0 100% 0 0);
+        transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .section-label.is-visible {
+        clip-path: inset(0 0% 0 0);
+    }
+
+    /* 2. Cards Slide in Alternating */
+    .interactive-card:nth-child(odd) {
+        opacity: 0;
+        transform: translateX(-40px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .interactive-card:nth-child(even) {
+        opacity: 0;
+        transform: translateX(40px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .interactive-card.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .game-logo-large {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: clamp(56px, 18vw, 96px) !important;
+        text-align: center !important;
+        color: #FFFFFF !important;
+        margin-bottom: 24px !important;
+        line-height: 1 !important;
+        white-space: normal !important;
+        /* Allow wrapping if needed, though script handles it */
+    }
+
+    /* 5. Blog Cards Sequential Cascade */
+    .blog-card {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+        transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .blog-card.is-visible {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    .blog-card:nth-child(1) {
+        transition-delay: 0ms;
+    }
+
+    .blog-card:nth-child(2) {
+        transition-delay: 150ms;
+    }
+
+    .blog-card:nth-child(3) {
+        transition-delay: 300ms;
+    }
+
+    /* 7. Team Profiles Pop In with Spring */
+    .profile-img-wrap {
+        opacity: 0;
+        transform: scale(0.6);
+        transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .profile:nth-child(2) .profile-img-wrap {
+        transition-delay: 150ms;
+    }
+
+    .profile-img-wrap.is-visible {
+        opacity: 1;
+        transform: scale(1);
     }
 }

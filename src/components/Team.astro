@@ -1,30 +1,30 @@
 ---
 ---
-<section id="team" class="team container">
+<section id="team" class="team-section container">
   <div class="team-header">
-    <div class="section-label">The Minds</div>
-    <h2 class="team-subtitle reveal-split">Crackheads</h2>
+    <div class="section-label">THE MINDS</div>
+    <h2 class="team-subtitle">Crackheads</h2>
   </div>
-  <div class="team-grid reveal-stagger">
-    <div class="profile">
-      <div class="profile-img-wrap profile-akira cursor-interact" data-cursor="VIEW">
+  <div class="team-profiles reveal-stagger">
+    <div class="team-profile">
+      <div class="profile-circle profile-img-wrap profile-akira cursor-interact" data-cursor="VIEW">
           <div class="placeholder-label">Akira</div>
       </div>
-      <h4>Akira</h4>
-      <p>Art Director & Animator</p>
+      <h4 class="profile-name">Akira</h4>
+      <p class="profile-role">Art Director & Animator</p>
     </div>
-    <div class="profile">
-      <div class="profile-img-wrap profile-joana cursor-interact" data-cursor="VIEW">
+    <div class="team-profile">
+      <div class="profile-circle profile-img-wrap profile-joana cursor-interact" data-cursor="VIEW">
           <div class="placeholder-label">Joana</div>
       </div>
-      <h4>Joana</h4>
-      <p>Lead Animator & Chaos Engine</p>
+      <h4 class="profile-name">Joana</h4>
+      <p class="profile-role">Lead Animator & Chaos Engine</p>
     </div>
   </div>
 </section>
 
 <style>
-  .team {
+  .team-section {
     padding-top: clamp(100px, 15vw, 200px);
     padding-bottom: clamp(100px, 15vw, 200px);
     text-align: center;
@@ -38,42 +38,28 @@
     align-items: center;
   }
 
-  .section-label {
-    font-size: 0.875rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: #888;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-  }
-
   .team-subtitle {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 4vw, 3.5rem);
     color: var(--pink);
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     width: 100%;
     text-align: center;
+    font-weight: 700;
   }
 
-  .team-subtitle :global(.split-top),
-  .team-subtitle :global(.split-bottom) {
-    display: flex;
-    justify-content: center;
-  }
-
-  .team-grid {
+  .team-profiles {
     display: flex;
     justify-content: center;
     gap: 6rem;
     flex-wrap: wrap;
   }
 
-  .profile {
+  .team-profile {
     text-align: center;
   }
 
-  .profile-img-wrap {
+  .profile-circle {
     width: 250px;
     height: 250px;
     border-radius: 50%;
@@ -85,7 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: visible; /* To allow ring to pulse outside */
+    overflow: visible;
   }
 
   .placeholder-label {
@@ -95,7 +81,7 @@
       text-transform: uppercase;
   }
 
-  .profile-img-wrap::after {
+  .profile-circle::after {
     content: '';
     position: absolute;
     inset: -10px;
@@ -130,32 +116,79 @@
     100% { box-shadow: 0 0 0 0 transparent; }
   }
 
-  .profile h4 {
+  .profile-name {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    font-weight: 700;
   }
 
-  .profile p {
+  .profile-role {
     color: #666;
     font-weight: 500;
   }
 
   @media (max-width: 768px) {
-    .team-grid {
+    .team-section {
+      text-align: center;
+      padding-inline: var(--padding-x);
+    }
+
+    .team-header {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #000;
+      margin-bottom: 8px;
+    }
+
+    .team-subtitle {
+      display: block;
+      font-size: clamp(28px, 8vw, 48px);
+      color: #FD82CB;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+    .team-profiles {
       flex-direction: column;
       align-items: center;
-      gap: 48px;
+      gap: 56px;
     }
 
-    .profile-img-wrap {
-      width: 140px;
-      height: 140px;
+    .team-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
     }
 
-    .profile h4 {
-        font-size: 1.5rem;
+    .profile-circle {
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+
+    .profile-name {
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .profile-role {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
     }
   }
+</style>
 </style>
 
 <script>

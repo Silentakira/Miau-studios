@@ -2,6 +2,7 @@
 ---
 <section id="about" class="about container">
   <div class="section-header reveal-stagger">
+    <div class="section-label">THE STUDIO</div>
     <h2 class="reveal-split">Quietly confident.</h2>
     <h2 class="reveal-split">Secretly feral.</h2>
     <p class="reveal">We believe in building games that feel alive before you even hit start. Digital comfort food laced with neon and adrenaline. We don't just polish; we give it teeth.</p>
@@ -35,15 +36,21 @@
     margin-inline: auto;
     width: 100%;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
-  h2 {
-    margin-bottom: 1.5rem;
+  .about h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 0.5rem; /* Tightened gap */
   }
 
   p {
     font-size: 1.25rem;
     max-width: 600px;
     color: #444;
+    margin-top: 1.5rem;
   }
 </style>
