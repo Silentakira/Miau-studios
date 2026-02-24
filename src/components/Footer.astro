@@ -18,7 +18,12 @@
       >
     </div>
   </div>
-
+  <img
+    src="/miau-logo.svg"
+    class="easter-cat footer-cat"
+    alt=""
+    aria-hidden="true"
+  />
   <div class="footer-middle container">
     <a
       href="#"
@@ -53,6 +58,22 @@
 </footer>
 
 <style>
+  .footer-cat {
+    position: absolute;
+    bottom: 20px;
+    left: clamp(40px, 8vw, 120px);
+    width: 80px;
+    height: 80px;
+    opacity: 0.15;
+    filter: invert(1);
+    transition: opacity 0.3s ease,
+      transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .footer-cat:hover {
+    opacity: 0.3;
+    transform: rotate(360deg);
+  }
   footer {
     background: var(--black);
     color: var(--white);

@@ -1,5 +1,6 @@
 ---
 ---
+
 <section id="blog" class="blog">
   <div class="container blog-container">
     <div class="blog-header">
@@ -7,51 +8,81 @@
       <h2 class="display-text reveal-split">Latest Stories</h2>
       <div class="filters">
         <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="digital-art">Digital Art</button>
+        <button class="filter-btn" data-filter="digital-art">Digital Art</button
+        >
         <button class="filter-btn" data-filter="design">Design Process</button>
         <button class="filter-btn" data-filter="animation">Animation</button>
       </div>
     </div>
-
+    <img
+      src="/miau-logo.svg"
+      class="easter-cat blog-cat"
+      alt=""
+      aria-hidden="true"
+    />
     <div class="grid-3 reveal-stagger blog-grid">
       <!-- DESIGN CARD -->
-      <a href="#" class="interactive-card blog-card card-yellow cursor-interact" data-category="design" data-cursor="READ">
+      <a
+        href="#"
+        class="interactive-card blog-card card-yellow cursor-interact"
+        data-category="design"
+        data-cursor="READ"
+      >
         <div class="blog-thumbnail">
-            <div class="placeholder-content">BLOG THUMBNAIL</div>
+          <div class="placeholder-content">BLOG THUMBNAIL</div>
         </div>
         <div class="blog-info">
           <div class="card-spotlight"></div>
           <span class="tag-pill">Design Process</span>
           <h3>Designing the Neon Grind</h3>
-          <p>How we mapped kickflips to BPM and survived the prototyping phase without breaking our controllers.</p>
+          <p>
+            How we mapped kickflips to BPM and survived the prototyping phase
+            without breaking our controllers.
+          </p>
           <div class="read-more">Read more <span>→</span></div>
         </div>
       </a>
 
       <!-- ART CARD -->
-      <a href="#" class="interactive-card blog-card card-pink cursor-interact" data-category="digital-art" data-cursor="READ">
+      <a
+        href="#"
+        class="interactive-card blog-card card-pink cursor-interact"
+        data-category="digital-art"
+        data-cursor="READ"
+      >
         <div class="blog-thumbnail">
-            <div class="placeholder-content">BLOG THUMBNAIL</div>
+          <div class="placeholder-content">BLOG THUMBNAIL</div>
         </div>
         <div class="blog-info">
           <div class="card-spotlight"></div>
           <span class="tag-pill tag-pink">Digital Art</span>
           <h3>Colors that Punch</h3>
-          <p>Our approach to the Skate Beats visual identity: why we chose pure white, pitch black, and violent neon.</p>
+          <p>
+            Our approach to the Skate Beats visual identity: why we chose pure
+            white, pitch black, and violent neon.
+          </p>
           <div class="read-more">Read more <span>→</span></div>
         </div>
       </a>
 
       <!-- ANIMATION CARD -->
-      <a href="#" class="interactive-card blog-card card-blue cursor-interact" data-category="animation" data-cursor="READ">
+      <a
+        href="#"
+        class="interactive-card blog-card card-blue cursor-interact"
+        data-category="animation"
+        data-cursor="READ"
+      >
         <div class="blog-thumbnail">
-            <div class="placeholder-content">BLOG THUMBNAIL</div>
+          <div class="placeholder-content">BLOG THUMBNAIL</div>
         </div>
         <div class="blog-info">
           <div class="card-spotlight"></div>
           <span class="tag-pill tag-yellow-black">Animation</span>
           <h3>Frame by Frame</h3>
-          <p>Breaking down Akira's workflow for creating character movement that feels heavy, responsive, and satisfying.</p>
+          <p>
+            Breaking down Akira's workflow for creating character movement that
+            feels heavy, responsive, and satisfying.
+          </p>
           <div class="read-more">Read more <span>→</span></div>
         </div>
       </a>
@@ -60,17 +91,32 @@
 </section>
 
 <style>
+  .blog-cat {
+    position: absolute;
+    bottom: 36px;
+    right: 36px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.3;
+    transition: opacity 0.3s ease,
+      transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .blog-cat:hover {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
   .blog {
-    background: #FAFAFA;
+    background: #fafafa;
   }
 
   .blog-header {
-      margin-bottom: 3rem;
+    margin-bottom: 3rem;
   }
 
   h2 {
-      font-size: 3.5rem;
-      margin-bottom: 2rem;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
   }
 
   .filters {
@@ -97,7 +143,7 @@
   }
 
   .filter-btn::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -127,7 +173,8 @@
     padding: 0;
     overflow: hidden;
     border: var(--border);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s, scale 0.4s;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s,
+      scale 0.4s;
     cursor: none;
   }
 
@@ -142,10 +189,10 @@
   }
 
   .placeholder-content {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      color: #888;
-      font-weight: 700;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: #888;
+    font-weight: 700;
   }
 
   .blog-info {
@@ -169,8 +216,13 @@
     transition: transform 0.3s;
   }
 
-  .tag-pink { background: var(--pink); }
-  .tag-yellow-black { background: var(--yellow); color: var(--black); }
+  .tag-pink {
+    background: var(--pink);
+  }
+  .tag-yellow-black {
+    background: var(--yellow);
+    color: var(--black);
+  }
 
   h3 {
     font-size: 1.75rem;
@@ -199,9 +251,9 @@
   .blog-card:hover .read-more span {
     transform: translateX(4px);
   }
-  
+
   .blog-card:hover .tag-pill {
-      transform: translateY(-4px);
+    transform: translateY(-4px);
   }
 
   :global(.blog-card.hidden) {
@@ -209,7 +261,9 @@
     scale: 0.95;
     pointer-events: none;
     position: absolute; /* Hide from layout */
-    width: 0; height: 0; overflow: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
   }
 
   @media (max-width: 1024px) {
@@ -224,7 +278,8 @@
       gap: 20px;
     }
 
-    .filters { /* Renamed to .blog-filters in the instruction, but keeping original to avoid HTML changes */
+    .filters {
+      /* Renamed to .blog-filters in the instruction, but keeping original to avoid HTML changes */
       overflow-x: auto;
       flex-wrap: nowrap;
       -webkit-overflow-scrolling: touch;
@@ -234,35 +289,36 @@
       width: 100%;
     }
 
-    .filters::-webkit-scrollbar { /* Renamed to .blog-filters in the instruction, but keeping original to avoid HTML changes */
+    .filters::-webkit-scrollbar {
+      /* Renamed to .blog-filters in the instruction, but keeping original to avoid HTML changes */
       display: none;
     }
 
     .filter-btn {
-        flex-shrink: 0;
+      flex-shrink: 0;
     }
   }
 </style>
 
 <script>
   // Blog Filters
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const blogCards = document.querySelectorAll('.blog-card');
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const blogCards = document.querySelectorAll(".blog-card");
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
       // Toggle active states
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
-      const category = btn.getAttribute('data-filter');
+      const category = btn.getAttribute("data-filter");
 
-      blogCards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        if (category === 'all' || cardCategory === category) {
-          card.classList.remove('hidden');
+      blogCards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-category");
+        if (category === "all" || cardCategory === category) {
+          card.classList.remove("hidden");
         } else {
-          card.classList.add('hidden');
+          card.classList.add("hidden");
         }
       });
     });

@@ -1,8 +1,15 @@
 ---
 ---
+
 <div id="loader">
   <div class="loader-logo">
-    <!-- Injected by JS -->
+    <img src="/miau-logo.svg" class="loading-cat" alt="" aria-hidden="true" />
+    <div class="loader-text">
+      <span class="loader-char" style="animation-delay: 0s">M</span>
+      <span class="loader-char" style="animation-delay: 0.1s">I</span>
+      <span class="loader-char" style="animation-delay: 0.2s">A</span>
+      <span class="loader-char" style="animation-delay: 0.3s">U</span>
+    </div>
   </div>
 </div>
 
@@ -18,35 +25,52 @@
   }
 
   .loader-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Cat spins behind the text */
+  .loading-cat {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0.12;
+    animation: spin-load 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    z-index: 0;
+  }
+
+  @keyframes spin-load {
+    0% {
+      transform: scale(0.5) rotate(-180deg);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.12;
+    }
+  }
+
+  /* MIAU text sits on top */
+  .loader-text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 2px;
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 900;
     letter-spacing: -0.05em;
-    display: flex;
-    gap: 4px;
   }
 
-  :global(.loader-char) {
+  .loader-char {
     opacity: 0;
+    display: inline-block;
+    animation: charIn 0.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    #loader {
-      transition: opacity 0.5s ease, transform 0.5s ease 0.5s;
-    }
-
-    #loader.hidden {
-      opacity: 0;
-      transform: translateY(-100%);
-      pointer-events: none;
-    }
-
-    :global(.loader-char) {
-      animation: loaderAssemble 0.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-  }
-
-  @keyframes loaderAssemble {
+  @keyframes charIn {
     0% {
       opacity: 0;
       transform: translateY(20px);
@@ -56,26 +80,28 @@
       transform: translateY(0);
     }
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #loader {
+      transition: opacity 0.5s ease, transform 0.5s ease 0.1s;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+    }
+  }
 </style>
 
 <script>
-  window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
     if (!loader) return;
-    const logoContainer = loader.querySelector('.loader-logo');
-    const logoText = "MIAU";
-    
-    logoText.split('').forEach((char, i) => {
-      const span = document.createElement('span');
-      span.className = 'loader-char';
-      span.innerText = char;
-      span.style.animationDelay = `${i * 0.1}s`;
-      logoContainer?.appendChild(span);
-    });
 
     setTimeout(() => {
-      loader.classList.add('hidden');
-      setTimeout(() => loader.remove(), 1000);
-    }, 1000);
+      loader.classList.add("hidden");
+      setTimeout(() => loader.remove(), 600);
+    }, 1600);
   });
 </script>

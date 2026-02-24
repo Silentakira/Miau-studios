@@ -256,6 +256,12 @@ section {
         transform: translateY(20px);
     }
 
+    .easter-cat {
+        cursor: none;
+        pointer-events: auto;
+        z-index: 2;
+    }
+
     /* Reset active state to confirm they reach 0 */
     .reveal-split.active .split-top,
     .reveal-split.active .split-bottom,
