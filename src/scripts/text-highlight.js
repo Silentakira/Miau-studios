@@ -2,9 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const hoverIndicator = document.querySelector('.hover-indicator');
-  let hasHoveredText = false;
-
   // Add hover effect to all text elements
   const textSelectors = [
     'h1', 'h2', 'h3', 'h4',
@@ -40,21 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add class and mark as processed
     element.classList.add('text-hover-effect', 'text-highlight-processed');
-
-    // Hide indicator on first text hover
-    element.addEventListener('mouseenter', () => {
-      if (!hasHoveredText && hoverIndicator) {
-        hoverIndicator.classList.add('hidden');
-        hasHoveredText = true;
-
-        // Remove from DOM after animation
-        setTimeout(() => {
-          if (hoverIndicator && hoverIndicator.parentNode) {
-            hoverIndicator.remove();
-          }
-        }, 500);
-      }
-    });
   };
 
   // Process all text elements

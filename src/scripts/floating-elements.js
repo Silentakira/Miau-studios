@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     shape.className = 'global-floating-shape';
 
     // Random properties
-    const size = Math.random() * 50 + 30; // 30-80px (bigger for visibility)
+    const size = Math.random() * 60 + 40; // 40-100px (MUCH bigger for visibility)
     const startX = Math.random() * 100;
     const duration = Math.random() * 15 + 10; // 10-25s
     const delay = Math.random() * 5;
     const colors = ['var(--yellow)', 'var(--pink)', 'var(--blue)'];
     const color = colors[Math.floor(Math.random() * colors.length)];
-    const opacity = Math.random() * 0.25 + 0.15; // 15-40% opacity (VERY visible!)
+    const opacity = Math.random() * 0.30 + 0.40; // 40-70% opacity (EXTREMELY visible!)
 
     shape.style.cssText = `
       position: fixed;
@@ -210,12 +210,12 @@ document.addEventListener('DOMContentLoaded', () => {
     shape.className = 'floating-shape';
 
     // Random properties
-    const size = Math.random() * 40 + 25; // 25-65px
+    const size = Math.random() * 50 + 30; // 30-80px
     const startX = Math.random() * 100;
     const duration = Math.random() * 8 + 6; // 6-14s
     const colors = ['var(--yellow)', 'var(--pink)', 'var(--blue)'];
     const color = colors[Math.floor(Math.random() * colors.length)];
-    const opacity = Math.random() * 0.30 + 0.15; // 15-45% opacity (VERY visible!)
+    const opacity = Math.random() * 0.35 + 0.35; // 35-70% opacity (EXTREMELY visible!)
 
     shape.style.cssText = `
       position: absolute;
