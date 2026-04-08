@@ -88,15 +88,17 @@
     overflow: hidden;
     display: flex;
     white-space: nowrap;
-    touch-action: pan-y; /* only allow vertical touch, not horizontal */
+    touch-action: pan-y;
+    width: 100%;
   }
 
   .marquee {
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 900;
     text-transform: uppercase;
     display: flex;
+    line-height: 1.1;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -116,6 +118,8 @@
 
   .marquee span {
     margin-right: 2rem;
+    display: inline-block;
+    overflow-wrap: break-word;
   }
 
   .yellow-txt {

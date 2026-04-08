@@ -55,27 +55,35 @@
   .title-outline {
     position: absolute;
     font-family: var(--font-heading);
-    font-size: clamp(48px, 8vw, 120px);
+    font-size: clamp(32px, 6vw, 96px);
     font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     color: transparent;
     -webkit-text-stroke: 2px rgba(0, 0, 0, 0.2);
-    transform: translate(8px, 8px);
-    white-space: nowrap;
+    transform: translate(6px, 6px);
+    white-space: normal;
+    text-align: center;
     pointer-events: none;
     user-select: none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
   }
 
   .title-filled {
     position: relative;
-    font-size: clamp(48px, 8vw, 120px);
+    font-size: clamp(32px, 6vw, 96px);
     font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin: 0;
     z-index: 1;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
   }
 
   p {
@@ -100,13 +108,11 @@
   @media (max-width: 768px) {
     .title-outline,
     .title-filled {
-      font-size: clamp(36px, 11vw, 64px);
-      white-space: normal;
-      text-align: center;
+      font-size: clamp(28px, 8vw, 48px);
     }
 
     .title-outline {
-      transform: translate(5px, 5px);
+      transform: translate(4px, 4px);
     }
 
     p {

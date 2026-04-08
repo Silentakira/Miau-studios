@@ -72,13 +72,12 @@ function animate() {
     }
 
     if (cursor) {
-        let speedX = Math.abs(dx);
-        let speedY = Math.abs(dy);
+        const speed = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        const stretch = isHovering ? 1 : 1 + Math.min(speed * 0.015, 1.5);
+        const squash = isHovering ? 1 : 1 / stretch;
 
-        let stretchX = isHovering ? 1 : 1 + Math.min(speedX * 0.015, 0.6);
-        let stretchY = isHovering ? 1 : 1 + Math.min(speedY * 0.015, 0.6);
-
-        cursor.style.transform = `translate(${cX}px, ${cY}px) translate(-50%, -50%) scale(${stretchX}, ${stretchY})`;
+        cursor.style.transform = `translate3d(${cX}px, ${cY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${stretch}, ${squash})`;
     }
 
     requestAnimationFrame(animate);
@@ -106,8 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
             el.addEventListener('mouseenter', () => {
                 isHovering = true;
                 if (cursor) {
-                    cursor.style.width = '16px';
-                    cursor.style.height = '16px';
+                    cursor.style.width = '12px';
+                    cursor.style.height = '12px';
+                    cursor.style.transition = 'width 0.15s ease, height 0.15s ease, background-color 0.15s ease, border 0.15s ease';
                 }
                 updateCursorColor();
             });
@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cursor) {
                     cursor.style.width = '20px';
                     cursor.style.height = '20px';
+                    cursor.style.transition = 'width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease';
                 }
                 updateCursorColor();
             });
