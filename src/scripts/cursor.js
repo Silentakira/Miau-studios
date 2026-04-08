@@ -64,9 +64,7 @@ function animate() {
         glow.style.left = `${gX}px`;
         glow.style.top = `${gY}px`;
 
-        if (isOverColoredSection(mX, mY)) {
-            glow.style.opacity = '0';
-        } else if (!firstMove) {
+        if (!firstMove) {
             glow.style.opacity = '1';
         }
     }

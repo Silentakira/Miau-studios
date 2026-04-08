@@ -6,6 +6,11 @@
     <h2 class="reveal-split">Quietly confident.</h2>
     <h2 class="reveal-split">Secretly feral.</h2>
     <p class="reveal">We believe in building games that feel alive before you even hit start. Digital comfort food laced with neon and adrenaline. We don't just polish; we give it teeth.</p>
+    <div class="quote-section reveal">
+      <blockquote class="main-quote">
+        "Do it because you can, not because others say you shouldn't."
+      </blockquote>
+    </div>
   </div>
 </section>
 
@@ -23,6 +28,27 @@
     /* Cards stack naturally because they are not grid yet, but let's be sure */
     .section-header {
         text-align: center;
+    }
+
+    .quote-section {
+      margin-top: 3rem;
+      padding: 2rem 1rem;
+    }
+
+    .main-quote {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+    }
+
+    .main-quote::before {
+      font-size: 3rem;
+      top: -15px;
+      left: -5px;
+    }
+
+    .main-quote::after {
+      font-size: 3rem;
+      bottom: -30px;
+      right: -5px;
     }
   }
 
@@ -52,5 +78,47 @@
     max-width: 600px;
     color: #444;
     margin-top: 1.5rem;
+  }
+
+  .quote-section {
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    position: relative;
+  }
+
+  .main-quote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--black);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+
+  .main-quote::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    font-size: 4rem;
+    color: var(--yellow);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+  }
+
+  .main-quote::after {
+    content: '"';
+    position: absolute;
+    bottom: -40px;
+    right: -10px;
+    font-size: 4rem;
+    color: var(--pink);
+    opacity: 0.3;
+    font-family: Georgia, serif;
   }
 </style>
