@@ -57,6 +57,9 @@
 
   .team-profile {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .profile-circle {
@@ -118,13 +121,20 @@
 
   .profile-name {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
+    margin-bottom: 0.75rem;
+    font-weight: 800;
+    color: var(--black);
+    text-align: center;
+    display: block;
+    width: 100%;
   }
 
   .profile-role {
     color: #666;
     font-weight: 500;
+    text-align: center;
+    display: block;
+    width: 100%;
   }
 
   @media (max-width: 768px) {
@@ -178,14 +188,22 @@
 
     .profile-name {
       font-size: clamp(24px, 6vw, 32px);
-      font-weight: 700;
+      font-weight: 800;
       margin: 0;
+      text-align: center;
+      display: block;
+      width: 100%;
+      color: var(--black);
     }
 
     .profile-role {
       font-size: 14px;
       color: #666;
       margin: 0;
+      text-align: center;
+      display: block;
+      width: 100%;
+      font-weight: 500;
     }
   }
 </style>
