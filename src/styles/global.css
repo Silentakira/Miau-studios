@@ -82,7 +82,7 @@ section {
     padding-block: clamp(64px, 10vw, 140px);
     padding-inline: var(--padding-x);
     position: relative;
-    z-index: 1;
+    z-index: 10000;
 }
 
 /* Universal Border Rule */

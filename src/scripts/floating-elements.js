@@ -1,11 +1,84 @@
-// Floating Elements - Hero section only with explosion effect
+// Floating Elements - Everywhere on page + Hero section with explosions
 document.addEventListener('DOMContentLoaded', () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  // ========== GLOBAL FALLING ELEMENTS (Everywhere) ==========
+  const body = document.body;
+
+  // Create floating shapes for entire page
+  const createGlobalFallingShape = () => {
+    const shape = document.createElement('div');
+    shape.className = 'global-floating-shape';
+
+    // Random properties
+    const size = Math.random() * 40 + 20; // 20-60px
+    const startX = Math.random() * 100;
+    const duration = Math.random() * 15 + 10; // 10-25s
+    const delay = Math.random() * 5;
+    const colors = ['var(--yellow)', 'var(--pink)', 'var(--blue)'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const opacity = Math.random() * 0.08 + 0.02;
+
+    shape.style.cssText = `
+      position: fixed;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      border-radius: ${Math.random() > 0.5 ? '50%' : '30%'};
+      opacity: 0;
+      left: ${startX}vw;
+      top: -100px;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(1px);
+    `;
+
+    body.appendChild(shape);
+
+    // Animate shape
+    let startTime = null;
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = (timestamp - startTime) / 1000;
+      const adjustedProgress = Math.max(0, progress - delay);
+
+      if (adjustedProgress <= 0) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      const yPos = (adjustedProgress / duration) * (window.innerHeight + 200) - 100;
+      const currentOpacity = adjustedProgress < 0.5 ? opacity * (adjustedProgress * 2) : opacity * (2 - adjustedProgress * 2);
+      const rotation = adjustedProgress * 360;
+      const xOffset = Math.sin(adjustedProgress * 2) * 50;
+
+      shape.style.top = `${yPos}px`;
+      shape.style.opacity = currentOpacity;
+      shape.style.transform = `translateX(${xOffset}px) rotate(${rotation}deg)`;
+
+      if (adjustedProgress < duration && yPos < window.innerHeight + 200) {
+        requestAnimationFrame(animate);
+      } else {
+        shape.remove();
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
+
+  // Create multiple global falling shapes
+  for (let i = 0; i < 8; i++) {
+    setTimeout(createGlobalFallingShape, i * 600);
+  }
+
+  // Continuously create new global shapes
+  setInterval(createGlobalFallingShape, 2500);
+
+  // ========== HERO SECTION FLOATING ELEMENTS (With explosions) ==========
   const hero = document.querySelector('.hero');
   if (!hero) return;
 
-  // Create floating shapes container
+  // Create floating shapes container for hero
   const container = document.createElement('div');
   container.className = 'floating-shapes-container';
   container.style.cssText = `
@@ -73,10 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
           container.appendChild(miniParticle);
 
-          let startTime = null;
+          let miniStartTime = null;
           const animateMini = (timestamp) => {
-            if (!startTime) startTime = timestamp;
-            const time = (timestamp - startTime) / 1000;
+            if (!miniStartTime) miniStartTime = timestamp;
+            const time = (timestamp - miniStartTime) / 1000;
 
             const newX = x + Math.cos(miniAngle) * miniVelocity * time;
             const newY = y + Math.sin(miniAngle) * miniVelocity * time;
@@ -128,8 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Create floating shape
-  const createFloatingShape = () => {
+  // Create hero floating shape
+  const createHeroFloatingShape = () => {
     const heroRect = hero.getBoundingClientRect();
     const heroBottom = heroRect.height;
 
@@ -217,18 +290,18 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(animate);
   };
 
-  // Create floating shapes periodically
-  const createShapes = () => {
+  // Create hero floating shapes periodically
+  const createHeroShapes = () => {
     if (document.visibilityState === 'visible') {
-      createFloatingShape();
+      createHeroFloatingShape();
     }
   };
 
-  // Initial shapes
+  // Initial hero shapes
   for (let i = 0; i < 4; i++) {
-    setTimeout(createShapes, i * 400);
+    setTimeout(createHeroShapes, i * 400);
   }
 
-  // Continuously create new shapes
-  setInterval(createShapes, 1800);
+  // Continuously create new hero shapes
+  setInterval(createHeroShapes, 1800);
 });

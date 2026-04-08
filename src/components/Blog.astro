@@ -110,12 +110,18 @@
   .blog {
     background: var(--white);
     position: relative;
+    z-index: 10000;
+  }
+
+  .blog-container {
+    position: relative;
+    z-index: 10001;
   }
 
   .blog-header {
     margin-bottom: 3rem;
     position: relative;
-    z-index: 1;
+    z-index: 10001;
   }
 
   h2 {
@@ -166,7 +172,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
     position: relative;
-    z-index: 1;
+    z-index: 10001;
   }
 
   .blog-card {
