@@ -66,13 +66,35 @@
     height: 80px;
     opacity: 0.15;
     filter: invert(1);
-    transition: opacity 0.3s ease,
-      transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: catFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes catFloat {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(5deg);
+    }
   }
 
   .footer-cat:hover {
-    opacity: 0.3;
-    transform: rotate(360deg);
+    opacity: 0.4;
+    filter: invert(1) drop-shadow(0 0 20px rgba(255, 225, 0, 0.6));
+    animation: catSpin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes catSpin {
+    0% {
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+    50% {
+      transform: translateY(-15px) rotate(180deg) scale(1.1);
+    }
+    100% {
+      transform: translateY(0) rotate(360deg) scale(1);
+    }
   }
   footer {
     background: var(--black);
@@ -90,6 +112,12 @@
     white-space: nowrap;
     touch-action: pan-y;
     width: 100%;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .marquee-wrap:hover {
+    opacity: 0.9;
   }
 
   .marquee {
@@ -99,11 +127,16 @@
     text-transform: uppercase;
     display: flex;
     line-height: 1.1;
+    transition: animation-duration 0.3s ease;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .marquee {
       animation: marquee 25s linear infinite;
+    }
+
+    .marquee-wrap:hover .marquee {
+      animation-duration: 15s;
     }
   }
 
@@ -141,12 +174,30 @@
     text-decoration: none;
     position: relative;
     display: inline-block;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: none;
+  }
+
+  .social-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--yellow), var(--pink));
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 2px;
+  }
+
+  .social-link:hover::before {
+    width: 100%;
   }
 
   .social-link:hover {
     color: var(--pink);
-    transform: translateY(-15px) rotate(-2deg);
+    transform: translateY(-20px) rotate(-3deg) scale(1.05);
+    text-shadow: 0 0 20px rgba(253, 130, 203, 0.5);
   }
 
   :global(.floating-emoji) {
@@ -264,4 +315,58 @@
       }, 600);
     });
   });
+
+  // Interactive Marquee
+  const marqueeWrap = document.querySelector('.marquee-wrap');
+  const marquee = document.querySelector('.marquee');
+
+  if (marqueeWrap && marquee) {
+    let isPaused = false;
+
+    marqueeWrap.addEventListener('click', () => {
+      isPaused = !isPaused;
+      marquee.style.animationPlayState = isPaused ? 'paused' : 'running';
+
+      // Visual feedback
+      marqueeWrap.style.transform = 'scale(1.02)';
+      setTimeout(() => {
+        marqueeWrap.style.transform = 'scale(1)';
+      }, 200);
+    });
+
+    // Speed up on scroll
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const delta = Math.abs(window.scrollY - lastScrollY);
+      if (delta > 10 && !isPaused) {
+        const currentDuration = 25 - Math.min(delta * 0.1, 15);
+        marquee.style.animationDuration = `${currentDuration}s`;
+      }
+      lastScrollY = window.scrollY;
+    }, { passive: true });
+  }
+
+  // Footer cat surprise
+  const footerCat = document.querySelector('.footer-cat');
+  let catClicks = 0;
+
+  if (footerCat) {
+    footerCat.addEventListener('click', () => {
+      catClicks++;
+
+      if (catClicks === 3) {
+        // Surprise on 3rd click!
+        footerCat.style.transform = 'scale(2) rotate(720deg)';
+        footerCat.style.opacity = '0.8';
+        footerCat.style.filter = 'invert(1) drop-shadow(0 0 30px rgba(255, 225, 0, 0.8))';
+
+        setTimeout(() => {
+          footerCat.style.transform = '';
+          footerCat.style.opacity = '';
+          footerCat.style.filter = '';
+          catClicks = 0;
+        }, 1000);
+      }
+    });
+  }
 </script>

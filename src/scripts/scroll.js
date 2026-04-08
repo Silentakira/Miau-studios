@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, ioOptions);
 
     // Observe all possible animatable elements
-    const selectors = '.section-label, .interactive-card, .blog-card, .profile-img-wrap, .reveal, .reveal-split, .social-proof, #community, .reveal-stagger';
+    const selectors = '.section-label, .interactive-card, .blog-card, .profile-img-wrap, .reveal, .reveal-split, .reveal-scale, .reveal-left, .reveal-right, .social-proof, #community, .reveal-stagger';
 
     document.querySelectorAll(selectors).forEach(el => {
         observer.observe(el);
@@ -135,6 +135,45 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             lastScrollY = window.scrollY;
         }, { passive: true });
+    }
+
+    // 7. Parallax Effects (Desktop Only)
+    if (!isTouchDevice && !prefersReducedMotion) {
+        const parallaxElements = document.querySelectorAll('.bg-shape, .hero-cat');
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.scrollY;
+
+                    parallaxElements.forEach((el, index) => {
+                        const speed = (index + 1) * 0.05;
+                        const yPos = -(scrolled * speed);
+                        el.style.transform = `translateY(${yPos}px)`;
+                    });
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    // 8. Scale on scroll for hero content
+    if (!prefersReducedMotion) {
+        const heroContent = document.querySelector('.hero');
+        if (heroContent) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                const heroHeight = heroContent.offsetHeight;
+                const progress = Math.min(scrolled / heroHeight, 1);
+
+                // Subtle scale and fade as you scroll
+                heroContent.style.transform = `scale(${1 - progress * 0.05})`;
+                heroContent.style.opacity = 1 - (progress * 0.3);
+            }, { passive: true });
+        }
     }
 
     // 3. Social Proof Counter (With Mobile Pulse)
