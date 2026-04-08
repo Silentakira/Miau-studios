@@ -48,7 +48,12 @@
 
   .game-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .game-content > * {
+    pointer-events: auto;
   }
 
   .game-logo-container {
@@ -96,26 +101,34 @@
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
+      justify-content: center !important;
       visibility: visible !important;
       opacity: 1;
-      font-size: clamp(56px, 18vw, 96px);
+      font-size: clamp(42px, 14vw, 72px);
       text-align: center;
       color: #FFFFFF;
-      margin-bottom: 24px;
-      line-height: 1;
+      margin-bottom: 2rem;
+      line-height: 0.9;
     }
 
     .game-headline {
-      font-size: clamp(28px, 8vw, 52px);
+      font-size: clamp(24px, 6vw, 36px);
+      margin-bottom: 2rem;
+    }
+
+    .game-tagline {
+      font-size: clamp(16px, 4vw, 20px);
+      margin-bottom: 2.5rem;
+      padding: 0 1rem;
     }
 
     #game-bg-canvas {
-      opacity: 0.6;
+      opacity: 0.5;
       z-index: 0;
     }
-    
+
     .game-content {
-      z-index: 1;
+      z-index: 2;
     }
   }
 </style>
