@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     shape.className = 'global-floating-shape';
 
     // Random properties
-    const size = Math.random() * 40 + 20; // 20-60px
+    const size = Math.random() * 40 + 25; // 25-65px
     const startX = Math.random() * 100;
     const duration = Math.random() * 15 + 10; // 10-25s
     const delay = Math.random() * 5;
     const colors = ['var(--yellow)', 'var(--pink)', 'var(--blue)'];
     const color = colors[Math.floor(Math.random() * colors.length)];
-    const opacity = Math.random() * 0.08 + 0.02;
+    const opacity = Math.random() * 0.15 + 0.08; // 8-23% opacity (much more visible!)
 
     shape.style.cssText = `
       position: fixed;
@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
       left: ${startX}vw;
       top: -100px;
       pointer-events: none;
-      z-index: 0;
-      filter: blur(1px);
+      z-index: 5;
+      filter: blur(0.5px);
     `;
 
     body.appendChild(shape);
@@ -210,12 +210,12 @@ document.addEventListener('DOMContentLoaded', () => {
     shape.className = 'floating-shape';
 
     // Random properties
-    const size = Math.random() * 30 + 15; // 15-45px
+    const size = Math.random() * 35 + 20; // 20-55px (slightly bigger)
     const startX = Math.random() * 100;
     const duration = Math.random() * 8 + 6; // 6-14s
     const colors = ['var(--yellow)', 'var(--pink)', 'var(--blue)'];
     const color = colors[Math.floor(Math.random() * colors.length)];
-    const opacity = Math.random() * 0.06 + 0.02;
+    const opacity = Math.random() * 0.18 + 0.10; // 10-28% opacity (much more visible!)
 
     shape.style.cssText = `
       position: absolute;
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
       opacity: 0;
       left: ${startX}%;
       top: -50px;
-      filter: blur(1px);
+      filter: blur(0.5px);
       pointer-events: auto;
       cursor: pointer;
       z-index: 1;
