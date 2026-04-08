@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pointer-events: auto;
         cursor: pointer;
         transform: translate(-50%, -50%);
-        z-index: 10;
+        z-index: -1;
       `;
 
       container.appendChild(particle);
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             top: ${y}px;
             opacity: 1;
             pointer-events: none;
-            z-index: 11;
+            z-index: -1;
           `;
 
           container.appendChild(miniParticle);
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filter: blur(0px);
       pointer-events: auto;
       cursor: pointer;
-      z-index: 1;
+      z-index: -1;
     `;
 
     container.appendChild(shape);
