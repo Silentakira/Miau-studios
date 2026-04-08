@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         top: ${y}px;
         opacity: 1;
         pointer-events: auto;
-        cursor: pointer;
+        cursor: none !important;
         transform: translate(-50%, -50%);
         z-index: -1;
       `;
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
       top: -50px;
       filter: blur(0px);
       pointer-events: auto;
-      cursor: pointer;
+      cursor: none !important;
       z-index: -1;
     `;
 
