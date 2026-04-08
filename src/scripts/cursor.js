@@ -1,5 +1,6 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const isTouchDevice = window.matchMedia('(hover: none)').matches;
+const isTouchDevice = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
 
 let mX = -100, mY = -100;
 let cX = -100, cY = -100;
@@ -11,7 +12,8 @@ let isOnDark = false;
 const cursor = document.getElementById('custom-cursor');
 const glow = document.getElementById('cursor-glow');
 
-if (isTouchDevice) {
+// Disable custom cursor on touch devices and mobile
+if (isTouchDevice || isMobile) {
     if (cursor) cursor.style.display = 'none';
     if (glow) glow.style.display = 'none';
     document.body.style.cursor = 'auto';
@@ -51,7 +53,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 function animate() {
-    if (prefersReducedMotion || isTouchDevice) return;
+    if (prefersReducedMotion || isTouchDevice || isMobile) return;
 
     let dx = mX - cX;
     let dy = mY - cY;
@@ -75,6 +77,8 @@ function animate() {
         const stretch = isHovering ? 1 : 1 + Math.min(speed * 0.015, 1.5);
         const squash = isHovering ? 1 : 1 / stretch;
 
+        // Use will-change for better performance across browsers
+        cursor.style.willChange = 'transform';
         cursor.style.transform = `translate3d(${cX}px, ${cY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${stretch}, ${squash})`;
     }
 
@@ -82,7 +86,7 @@ function animate() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.matchMedia("(pointer: fine)").matches && !isTouchDevice) {
+    if (window.matchMedia("(pointer: fine)").matches && !isTouchDevice && !isMobile) {
         animate();
 
         // DARK SECTION DETECTION

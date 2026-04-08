@@ -4,8 +4,8 @@
     --yellow: #FFE100;
     --pink: #FD82CB;
     --blue: #4DBAFD;
-    --font-heading: "-apple-system", "SF Pro Rounded", system-ui, sans-serif;
-    --font-body: "Montserrat", sans-serif;
+    --font-heading: "-apple-system", "BlinkMacSystemFont", "SF Pro Rounded", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --font-body: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     --padding-x: clamp(24px, 6vw, 120px);
     --border: 1px solid var(--black);
 }
@@ -28,6 +28,8 @@ body {
     font-size: clamp(15px, 1.5vw, 18px);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     cursor: none !important;
 }
 
@@ -424,4 +426,180 @@ section {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+/* CROSS-PLATFORM COMPATIBILITY */
+/* Windows Scrollbar Styling */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+/* WebKit Scrollbar (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Firefox specific scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+/* Platform-specific text rendering */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    /* Chrome, Safari, Edge - WebKit */
+    body {
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+@media screen and (min--moz-device-pixel-ratio: 0) {
+    /* Firefox */
+    body {
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Windows-specific font smoothing */
+@media screen and (min-width: 0\0) {
+    /* IE/Edge */
+    body {
+        font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch devices (mobile, tablet) */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    /* Allow text selection where needed */
+    p, h1, h2, h3, h4 {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+
+    /* Better touch target sizes */
+    .btn,
+    a,
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Smooth scrolling on touch devices */
+    html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Retina and high-DPI displays */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Windows dark mode support */
+@media (prefers-color-scheme: dark) {
+    /* Ensure colors work in dark mode */
+    :root {
+        --white: #FFFFFF;
+        --black: #000000;
+    }
+}
+
+/* Android-specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-width: 768px) {
+    /* Android devices */
+    body {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fix for Android font rendering */
+    * {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+}
+
+/* Consistent spacing across platforms */
+section {
+    padding-block: clamp(64px, 10vw, 140px);
+    padding-inline: var(--padding-x);
+    position: relative;
+    z-index: 10000;
+}
+
+/* Ensure consistent text alignment */
+h1, h2, h3, h4, p {
+    text-align: left;
+}
+
+/* Center alignment overrides */
+.game-section,
+.hero,
+.community {
+    text-align: center;
+}
+
+/* Fix for Windows ClearType */
+@supports (-ms-ime-align: auto) {
+    body {
+        font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+}
+
+/* Ensure consistent borders across browsers */
+.interactive-card,
+.blog-card,
+.profile-img-wrap,
+.btn,
+.nav-pill,
+.blog-thumbnail {
+    border: var(--border) !important;
+    box-sizing: border-box;
+}
+
+/* Fix for zoom on mobile */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+        /* Prevent iOS text zoom */
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+}
+
+/* Ensure consistent video/canvas rendering */
+canvas, video, img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
