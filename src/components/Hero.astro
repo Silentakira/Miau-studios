@@ -7,9 +7,14 @@
     <div class="bg-shape hero-blob"></div>
     <div class="bg-shape"></div>
   </div>
-  <h1 id="hero-headline" class="scramble-text glitch">
+  <h1 id="hero-headline" class="scramble-text glitch text-hover-effect">
     Digital comfort food. Built with teeth.
   </h1>
+
+  <div class="hover-indicator">
+    <div class="hover-arrow">↗</div>
+    <div class="hover-text">hover here</div>
+  </div>
 
   <p>
     A creative studio turning digital comfort food into <span class="cycle-wrap"
@@ -243,6 +248,64 @@
     font-weight: 800;
   }
 
+  /* Hover Indicator */
+  .hover-indicator {
+    position: absolute;
+    top: -40px;
+    right: 10%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: bounce 2s ease-in-out infinite;
+    z-index: 10;
+  }
+
+  .hover-arrow {
+    font-size: 1.5rem;
+    color: var(--yellow);
+    transform: rotate(-45deg);
+    animation: arrowPoint 2s ease-in-out infinite;
+  }
+
+  .hover-text {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--black);
+    background: var(--yellow);
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transform: rotate(-8deg);
+    box-shadow: 2px 2px 0 var(--pink);
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes arrowPoint {
+    0%, 100% {
+      transform: rotate(-45deg) translateX(0);
+    }
+    50% {
+      transform: rotate(-45deg) translateX(5px);
+    }
+  }
+
+  /* Hide indicator after user hovers */
+  .hover-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
   @media (max-width: 768px) {
     .hero {
       padding-block: clamp(80px, 20vw, 120px) clamp(60px, 15vw, 100px);
@@ -284,6 +347,11 @@
     .hero-blob {
       transform: scale(0.5);
       opacity: 0.04 !important;
+    }
+
+    /* Hide hover indicator on mobile */
+    .hover-indicator {
+      display: none;
     }
 
     /* Reduce glitch aggressiveness on mobile */
