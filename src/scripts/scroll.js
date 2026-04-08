@@ -120,23 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 6. Footer Marquee Speed (Mobile Only)
-    if (isTouchDevice && !prefersReducedMotion) {
-        let lastScrollY = window.scrollY;
-        let marqueeSpeed = 12;
-        const marqueeEl = document.querySelector('.marquee'); // Match the marquee element
-
-        window.addEventListener('scroll', () => {
-            const delta = Math.abs(window.scrollY - lastScrollY);
-            // faster scroll = lower duration = faster marquee
-            marqueeSpeed = Math.max(5, 12 - delta * 0.5);
-            if (marqueeEl) {
-                marqueeEl.style.animationDuration = `${marqueeSpeed}s`;
-            }
-            lastScrollY = window.scrollY;
-        }, { passive: true });
-    }
-
     // 7. Parallax Effects (Desktop Only)
     if (!isTouchDevice && !prefersReducedMotion) {
         const parallaxElements = document.querySelectorAll('.bg-shape, .hero-cat');

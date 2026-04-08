@@ -2,22 +2,6 @@
 ---
 
 <footer class="dark-section">
-  <div class="marquee-wrap">
-    <div class="marquee">
-      <span>Digital comfort food.</span><span class="yellow-txt"
-        >Secretly feral.</span
-      >
-      <span>Digital comfort food.</span><span class="yellow-txt"
-        >Secretly feral.</span
-      >
-      <span>Digital comfort food.</span><span class="yellow-txt"
-        >Secretly feral.</span
-      >
-      <span>Digital comfort food.</span><span class="yellow-txt"
-        >Secretly feral.</span
-      >
-    </div>
-  </div>
   <img
     src="/miau-logo.svg"
     class="easter-cat footer-cat"
@@ -102,61 +86,6 @@
     overflow: hidden;
     position: relative;
     padding: 0;
-  }
-
-  .marquee-wrap {
-    padding: 3rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    display: flex;
-    white-space: nowrap;
-    touch-action: pan-y;
-    width: 100%;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-  }
-
-  .marquee-wrap:hover {
-    opacity: 0.9;
-  }
-
-  .marquee {
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    display: flex;
-    line-height: 1.1;
-    transition: animation-duration 0.3s ease;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .marquee {
-      animation: marquee 25s linear infinite;
-    }
-
-    .marquee-wrap:hover .marquee {
-      animation-duration: 15s;
-    }
-  }
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .marquee span {
-    margin-right: 2rem;
-    display: inline-block;
-    overflow-wrap: break-word;
-  }
-
-  .yellow-txt {
-    color: var(--yellow);
   }
 
   .footer-middle {
@@ -254,19 +183,6 @@
   }
 
   @media (max-width: 768px) {
-    .marquee {
-      font-size: clamp(20px, 6vw, 32px);
-      animation-duration: 12s;
-      transform: translateZ(0); /* force GPU */
-      backface-visibility: hidden;
-      will-change: transform;
-    }
-
-    .marquee-wrap {
-      pointer-events: none; /* stop touch events interfering */
-      touch-action: pan-y;
-    }
-
     .footer-main {
       padding-block: 60px;
     }
@@ -315,36 +231,6 @@
       }, 600);
     });
   });
-
-  // Interactive Marquee
-  const marqueeWrap = document.querySelector('.marquee-wrap');
-  const marquee = document.querySelector('.marquee');
-
-  if (marqueeWrap && marquee) {
-    let isPaused = false;
-
-    marqueeWrap.addEventListener('click', () => {
-      isPaused = !isPaused;
-      marquee.style.animationPlayState = isPaused ? 'paused' : 'running';
-
-      // Visual feedback
-      marqueeWrap.style.transform = 'scale(1.02)';
-      setTimeout(() => {
-        marqueeWrap.style.transform = 'scale(1)';
-      }, 200);
-    });
-
-    // Speed up on scroll
-    let lastScrollY = window.scrollY;
-    window.addEventListener('scroll', () => {
-      const delta = Math.abs(window.scrollY - lastScrollY);
-      if (delta > 10 && !isPaused) {
-        const currentDuration = 25 - Math.min(delta * 0.1, 15);
-        marquee.style.animationDuration = `${currentDuration}s`;
-      }
-      lastScrollY = window.scrollY;
-    }, { passive: true });
-  }
 
   // Footer cat surprise
   const footerCat = document.querySelector('.footer-cat');
