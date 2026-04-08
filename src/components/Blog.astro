@@ -112,16 +112,6 @@
     position: relative;
   }
 
-  .blog::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at top, rgba(253, 130, 203, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(255, 225, 0, 0.02) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .blog-header {
     margin-bottom: 3rem;
     position: relative;
@@ -195,21 +185,6 @@
     position: relative;
   }
 
-  .blog-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.8) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .blog-card:hover::before {
-    opacity: 0.5;
-  }
-
   .blog-card:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
@@ -218,36 +193,18 @@
   .blog-thumbnail {
     height: 180px;
     width: 100%;
+    background: #f8f8f8;
     border-bottom: var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Gradient backgrounds for different card types */
-  .card-yellow .blog-thumbnail {
-    background: linear-gradient(135deg, rgba(255, 225, 0, 0.15) 0%, rgba(255, 225, 0, 0.05) 50%, rgba(255, 255, 255, 0.95) 100%);
-  }
-
-  .card-pink .blog-thumbnail {
-    background: linear-gradient(135deg, rgba(253, 130, 203, 0.15) 0%, rgba(253, 130, 203, 0.05) 50%, rgba(255, 255, 255, 0.95) 100%);
-  }
-
-  .card-blue .blog-thumbnail {
-    background: linear-gradient(135deg, rgba(77, 186, 253, 0.15) 0%, rgba(77, 186, 253, 0.05) 50%, rgba(255, 255, 255, 0.95) 100%);
   }
 
   .placeholder-content {
     font-family: var(--font-body);
     font-size: 0.75rem;
-    color: #666;
+    color: #888;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
   }
 
   .blog-info {
@@ -376,17 +333,6 @@
           card.classList.add("hidden");
         }
       });
-    });
-  });
-
-  // Mouse tracking for hover effect
-  blogCards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty("--mouse-x", `${x}%`);
-      card.style.setProperty("--mouse-y", `${y}%`);
     });
   });
 </script>
