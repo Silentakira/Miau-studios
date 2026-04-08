@@ -67,12 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Create multiple global falling shapes
-  for (let i = 0; i < 8; i++) {
-    setTimeout(createGlobalFallingShape, i * 600);
-  }
+  // for (let i = 0; i < 8; i++) {
+  //   setTimeout(createGlobalFallingShape, i * 600);
+  // }
 
-  // Continuously create new global shapes
-  setInterval(createGlobalFallingShape, 2500);
+  // // Continuously create new global shapes
+  // setInterval(createGlobalFallingShape, 2500);
 
   // ========== HERO SECTION FLOATING ELEMENTS (With explosions) ==========
   const hero = document.querySelector('.hero');
@@ -266,8 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
       shape.style.opacity = currentOpacity;
       shape.style.transform = `rotate(${progress * 360}deg)`;
 
-      // Check if reached bottom
-      if (yPos >= heroBottom - 20) {
+      // Check if reached bottom (explode at 75% down)
+      if (yPos >= heroBottom * 0.75) {
         // Create explosion
         const rect = shape.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
