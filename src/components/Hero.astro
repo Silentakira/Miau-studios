@@ -7,8 +7,8 @@
     <div class="bg-shape hero-blob"></div>
     <div class="bg-shape"></div>
   </div>
-  <h1 id="hero-headline" class="scramble-text glitch text-hover-effect">
-    Digital comfort food. Built with teeth.
+  <h1 id="hero-headline" class="scramble-text glitch">
+    <span class="text-hover-effect">Digital comfort food. Built with teeth.</span>
   </h1>
 
   <div class="hover-indicator">
@@ -16,7 +16,7 @@
     <div class="hover-text">hover here</div>
   </div>
 
-  <p>
+  <p class="text-hover-effect">
     A creative studio turning digital comfort food into <span class="cycle-wrap"
       ><span class="cycle-word">visceral</span>
     </span> experiences. We play hard, we make games harder.
@@ -60,7 +60,7 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     z-index: 1;
     padding-inline: var(--padding-x);
   }
@@ -251,17 +251,18 @@
   /* Hover Indicator */
   .hover-indicator {
     position: absolute;
-    top: -40px;
-    right: 10%;
+    top: -20px;
+    right: 5%;
     display: flex;
     align-items: center;
     gap: 8px;
     animation: bounce 2s ease-in-out infinite;
-    z-index: 10;
+    z-index: 1000;
+    pointer-events: none;
   }
 
   .hover-arrow {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--yellow);
     transform: rotate(-45deg);
     animation: arrowPoint 2s ease-in-out infinite;
@@ -269,7 +270,7 @@
 
   .hover-text {
     font-family: var(--font-body);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--black);
     background: var(--yellow);
@@ -279,6 +280,7 @@
     letter-spacing: 0.05em;
     transform: rotate(-8deg);
     box-shadow: 2px 2px 0 var(--pink);
+    white-space: nowrap;
   }
 
   @keyframes bounce {
@@ -286,7 +288,7 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-10px);
+      transform: translateY(-8px);
     }
   }
 
@@ -295,7 +297,7 @@
       transform: rotate(-45deg) translateX(0);
     }
     50% {
-      transform: rotate(-45deg) translateX(5px);
+      transform: rotate(-45deg) translateX(8px);
     }
   }
 

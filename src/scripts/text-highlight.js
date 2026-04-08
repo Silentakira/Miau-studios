@@ -8,19 +8,35 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add hover effect to all text elements
   const textSelectors = [
     'h1', 'h2', 'h3', 'h4',
-    'p', 'span', 'a', 'li',
-    '.text-hover-effect'
+    'p', 'span:not(.cycle-word):not(.tag-pill):not(.tag-yellow-black):not(.tag-pink)',
+    'a:not(.btn):not(.social-link):not(.nav-link)',
+    'li'
   ];
 
   const processTextElement = (element) => {
     // Skip if already processed
     if (element.classList.contains('text-highlight-processed')) return;
 
-    // Skip cursor interact elements
-    if (element.classList.contains('cursor-interact')) return;
+    // Skip specific classes
+    if (element.classList.contains('cursor-interact') ||
+        element.classList.contains('scramble-text') ||
+        element.classList.contains('glitch') ||
+        element.classList.contains('section-label') ||
+        element.classList.contains('title-outline') ||
+        element.classList.contains('title-filled') ||
+        element.closest('blockquote') ||
+        element.closest('.footer-middle') ||
+        element.closest('.footer-bottom')) {
+      return;
+    }
 
     // Skip interactive elements
     if (element.tagName === 'BUTTON' || element.tagName === 'INPUT') return;
+
+    // Skip parent elements that contain interactive children
+    if (element.querySelector('.cursor-interact, .btn, button, a[href], input')) {
+      return;
+    }
 
     // Add class and mark as processed
     element.classList.add('text-hover-effect', 'text-highlight-processed');
@@ -44,35 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Process all text elements
   textSelectors.forEach(selector => {
     document.querySelectorAll(selector).forEach(processTextElement);
-  });
-
-  // Also process text nodes within elements
-  const wrapTextNodes = (element) => {
-    const childNodes = Array.from(element.childNodes);
-    let hasText = false;
-
-    childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-        hasText = true;
-        const span = document.createElement('span');
-        span.className = 'text-hover-effect text-highlight-processed';
-        span.textContent = node.textContent;
-        node.parentNode.replaceChild(span, node);
-      }
-    });
-
-    return hasText;
-  };
-
-  // Process elements that might contain text
-  const containerSelectors = ['.section-label', '.display-text', '.reveal', '.reveal-stagger > *'];
-  containerSelectors.forEach(selector => {
-    document.querySelectorAll(selector).forEach(element => {
-      if (!element.classList.contains('text-highlight-processed')) {
-        wrapTextNodes(element);
-        element.classList.add('text-highlight-processed');
-      }
-    });
   });
 
   // Apply to dynamically added content

@@ -176,6 +176,7 @@ section {
     transition: opacity 0.3s ease, background-position 0.5s ease;
     transform: skewX(-15deg);
     border-radius: 4px;
+    pointer-events: none;
 }
 
 .text-hover-effect:hover::before {
@@ -183,8 +184,9 @@ section {
     background-position: 100% 0;
 }
 
-.text-hover-effect:hover {
-    color: var(--black) !important;
+/* For dark text, use lighter highlight */
+.text-hover-effect.dark-text:hover::before {
+    opacity: 0.5;
 }
 
 .split-hidden {
