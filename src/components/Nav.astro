@@ -34,12 +34,13 @@
     z-index: 1000;
     mix-blend-mode: difference;
     color: var(--white);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      border-radius 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      background-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      padding 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity 0.3s ease;
   }
   .nav-cat {
     width: 32px;
@@ -98,21 +99,40 @@
   :global(#main-nav.nav-pill) {
     top: 20px;
     left: 50%;
-    transform: translateX(-50%) !important;
+    transform: translateX(-50%) translateY(0) !important;
+    opacity: 1;
     width: fit-content;
     min-width: 600px;
     max-width: calc(100vw - 48px);
-    justify-content: center !important; /* ADD THIS */
-    gap: 60px !important; /* ADD THIS */
+    justify-content: center !important;
+    gap: 60px !important;
     border-radius: 999px;
     border: var(--border);
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 0 40px !important; /* ADD THIS */
+    padding: 0 40px !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     mix-blend-mode: normal !important;
     color: var(--black) !important;
+  }
+
+  /* PILL STATE ANIMATING IN */
+  :global(#main-nav.nav-pill.nav-animating) {
+    transform: translateX(-50%) translateY(-100%) !important;
+    opacity: 0;
+  }
+
+  /* NORMAL STATE ANIMATING IN */
+  :global(#main-nav.nav-normal.nav-animating) {
+    transform: translateY(-100%) !important;
+    opacity: 0;
+  }
+
+  /* NORMAL STATE FINAL */
+  :global(#main-nav.nav-normal) {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
   }
 
   :global(#main-nav.nav-pill .nav-inner) {
@@ -137,6 +157,7 @@
 
   :global(#main-nav.nav-hidden) {
     transform: translateY(-150%);
+    opacity: 0;
   }
 
   @media (min-width: 769px) {
@@ -164,7 +185,7 @@
       position: fixed;
       top: 16px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(0);
       width: calc(100% - 32px);
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
@@ -173,17 +194,25 @@
       border-radius: 999px;
       z-index: 1000;
       overflow: hidden;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        opacity 0.4s ease;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.3s ease;
       display: block;
       padding: 0;
       mix-blend-mode: normal;
       color: #000;
+      opacity: 1;
+    }
+
+    #main-nav.nav-hidden {
+      transform: translateX(-50%) translateY(-150%) !important;
+      opacity: 0;
     }
 
     #main-nav.menu-open {
       border-radius: 20px !important;
-      transition: none;
+      top: 16px;
+      transform: translateX(-50%) translateY(0) !important;
     }
 
     .nav-inner {
@@ -199,10 +228,15 @@
       padding: 8px 20px 16px;
       gap: 0;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.3s ease;
     }
 
     .nav-links.open {
       display: flex;
+      transform: translateY(0);
+      opacity: 1;
     }
 
     .nav-links a {

@@ -1,4 +1,5 @@
 let lastScrollY = window.scrollY;
+let currentNavState = 'normal'; // 'normal', 'pill', 'hidden'
 
 function handleScroll() {
     const nav = document.getElementById('main-nav');
@@ -14,16 +15,48 @@ function handleScroll() {
     const navLinks = document.getElementById('nav-links');
     if (navLinks && navLinks.classList.contains('open')) return;
 
+    let newState = currentNavState;
+
     if (currentScrollY <= 0) {
-        nav.classList.remove('nav-pill', 'nav-hidden');
+        newState = 'normal';
     } else if (currentScrollY < lastScrollY) {
         // Scrolling UP
-        nav.classList.add('nav-pill');
-        nav.classList.remove('nav-hidden');
+        newState = 'pill';
     } else {
         // Scrolling DOWN
-        nav.classList.add('nav-hidden');
-        nav.classList.remove('nav-pill');
+        newState = 'hidden';
+    }
+
+    // Only update if state is actually changing
+    if (newState !== currentNavState) {
+        // Add animating class for smooth transition
+        nav.classList.add('nav-animating');
+
+        // Remove all state classes first
+        nav.classList.remove('nav-pill', 'nav-hidden', 'nav-normal');
+
+        // Small delay for animation to start
+        setTimeout(() => {
+            // Add new state
+            switch(newState) {
+                case 'normal':
+                    nav.classList.add('nav-normal');
+                    break;
+                case 'pill':
+                    nav.classList.add('nav-pill');
+                    break;
+                case 'hidden':
+                    nav.classList.add('nav-hidden');
+                    break;
+            }
+
+            // Remove animating class after transition
+            setTimeout(() => {
+                nav.classList.remove('nav-animating');
+            }, 500);
+        }, 10);
+
+        currentNavState = newState;
     }
 
     lastScrollY = currentScrollY;
