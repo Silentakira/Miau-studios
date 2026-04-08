@@ -50,6 +50,9 @@
     position: relative;
     z-index: 2;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .game-content > * {
@@ -75,7 +78,9 @@
   .game-headline {
     font-size: clamp(2rem, 4vw, 3.5rem);
     max-width: 900px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 3rem;
+    display: block;
+    width: 100%;
   }
 
   .accent-pink {
@@ -85,8 +90,10 @@
   .game-tagline {
     font-size: 1.25rem;
     max-width: 600px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 3rem;
     color: #999;
+    display: block;
+    width: 100%;
   }
 
   @media (max-width: 768px) {
@@ -114,12 +121,16 @@
     .game-headline {
       font-size: clamp(24px, 6vw, 36px);
       margin-bottom: 2rem;
+      display: block;
+      width: 100%;
     }
 
     .game-tagline {
       font-size: clamp(16px, 4vw, 20px);
       margin-bottom: 2.5rem;
       padding: 0 1rem;
+      display: block;
+      width: 100%;
     }
 
     #game-bg-canvas {
