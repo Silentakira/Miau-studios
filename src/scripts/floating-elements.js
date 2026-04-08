@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const yPos = (adjustedProgress / duration) * (window.innerHeight + 200) - 100;
-      const currentOpacity = adjustedProgress < 0.5 ? opacity * (adjustedProgress * 2) : opacity * (2 - adjustedProgress * 2);
+      const currentOpacity = adjustedProgress < 0.15 ? opacity * (adjustedProgress * 6.67) : opacity; // Quick fade in, then stay visible
       const rotation = adjustedProgress * 360;
       const xOffset = Math.sin(adjustedProgress * 2) * 50;
 
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const progress = (timestamp - startTime) / 1000;
 
       const yPos = (progress / duration) * (heroBottom + 100) - 50;
-      const currentOpacity = progress < 0.5 ? opacity * (progress * 2) : opacity * (2 - progress * 2);
+      const currentOpacity = progress < 0.15 ? opacity * (progress * 6.67) : opacity; // Quick fade in, then stay visible
 
       shape.style.top = `${yPos}px`;
       shape.style.opacity = currentOpacity;
