@@ -4,7 +4,21 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CursorGlow from '../components/CursorGlow.astro';
 
-const { title, date, category, excerpt } = Astro.props;
+const { title, date, category, excerpt, heroImage } = Astro.props;
+
+// Format date safely
+const formatDate = (dateStr) => {
+  if (!dateStr) return null;
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return null;
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch {
+    return null;
+  }
+};
+
+const formattedDate = formatDate(date);
 ---
 
 <BaseLayout title={`Miau Studio | ${title}`}>
@@ -18,8 +32,18 @@ const { title, date, category, excerpt } = Astro.props;
       <span class="blog-category">{category}</span>
       <h1 class="blog-title">{title}</h1>
       <p class="blog-excerpt">{excerpt}</p>
-      <time class="blog-date">{new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+      {formattedDate && (
+        <time class="blog-date">{formattedDate}</time>
+      )}
     </header>
+
+    {heroImage && (
+      <div class="blog-hero-image">
+        <div class="hero-image-frame">
+          <img src={heroImage} alt={title} />
+        </div>
+      </div>
+    )}
 
     <div class="blog-content">
       <slot />
@@ -98,6 +122,51 @@ const { title, date, category, excerpt } = Astro.props;
     font-size: 0.9rem;
     color: #888;
     font-weight: 500;
+  }
+
+  .blog-hero-image {
+    margin: 3rem 0;
+    width: 100%;
+  }
+
+  .hero-image-frame {
+    width: 100%;
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--yellow);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-image-frame::before {
+    content: '🖼️';
+    position: absolute;
+    font-size: 4rem;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .hero-image-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-image-frame:empty::after {
+    content: 'Blog Hero Image';
+    position: absolute;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--black);
+    opacity: 0.3;
+    z-index: 1;
   }
 
   .blog-content {
@@ -196,16 +265,28 @@ const { title, date, category, excerpt } = Astro.props;
   .footer-cta h2 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 800;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    width: 100%;
+    text-align: center;
   }
 
   .footer-cta p {
     font-size: 1.125rem;
     color: #666;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    margin-top: 0;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer-cta .btn {
+    display: inline-block;
+    width: auto;
   }
 
   @media (max-width: 768px) {
@@ -229,6 +310,15 @@ const { title, date, category, excerpt } = Astro.props;
     .footer-cta .btn {
       width: 100%;
       max-width: 320px;
+    }
+
+    .hero-image-frame {
+      min-height: 250px;
+      border: 2px solid var(--black);
+    }
+
+    .hero-image-frame::before {
+      font-size: 2.5rem;
     }
   }
 </style>
