@@ -109,20 +109,28 @@ const { title, date, category, excerpt } = Astro.props;
   .blog-content :global(h2) {
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 800;
-    margin-top: 3rem;
+    margin-top: 4rem;
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
   }
 
   .blog-content :global(h3) {
     font-size: clamp(1.25rem, 2.5vw, 2rem);
     font-weight: 700;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+    display: block;
+    width: 100%;
   }
 
   .blog-content :global(p) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    display: block;
+    width: 100%;
   }
 
   .blog-content :global(strong) {
@@ -148,12 +156,14 @@ const { title, date, category, excerpt } = Astro.props;
 
   .blog-content :global(ul),
   .blog-content :global(ol) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
     padding-left: 2rem;
   }
 
   .blog-content :global(li) {
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
   }
 
   .blog-content :global(code) {
