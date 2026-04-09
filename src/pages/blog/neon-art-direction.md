@@ -3,104 +3,94 @@ layout: '../../layouts/BlogPostLayout.astro'
 title: 'Neon Dreams: The Art Direction of Skate Beats'
 date: '2026-03-01'
 category: 'Art Direction'
-excerpt: 'Why we chose a cyberpunk aesthetic and how we make it pop without melting your GPU.'
+excerpt: 'Why we went with the whole cyberpunk neon thing.'
 heroImage: '/blog-neon-art.jpg'
 ---
 
-Black, yellow, pink, blue. That's it. That's the whole palette.
+Black, yellow, pink, blue.
 
-Well, almost.
+That's it. That's the whole color palette.
 
-## The Anti-Realism Manifesto
+## Why Not Realistic?
 
-Look, we get it – photorealistic skating games are cool. Seeing individual sweat droplets on a skater's brow? Impressive tech.
+Look, photorealistic skating games exist. They're cool. But that's not what we're making.
 
-But that's not what we're about.
+Skate Beats is supposed to feel like a fever dream where you're invincible and everything is neon and your favorite song is playing way too loud.
 
-Skate Beats is **hyper-real**. It's not about looking like a video of someone skating. It's about feeling like a dream where you're invincible and the city is made of neon and pure dopamine.
+That's the vibe.
 
-## Color Theory for Chaos
+## Four Colors. Infinite Vibes.
 
-We locked ourselves in a room for three days with a color wheel and too many energy drinks. Here's what we came out with:
+We spent way too much time thinking about this, but here we are:
 
-### Primary Palette
-- **Black (#000000)** – The void. The canvas. The contrast.
-- **Yellow (#FFE100)** – Energy. Warning. Heat.
-- **Pink (#FD82CB)** – Movement. Pulse. Synthwave dreams.
-- **Blue (#4DBAFD)** – Depth. Cool. The other side of the tracks.
+### Black
+The canvas. The void. The contrast that makes everything else pop.
 
-That's it. No secondary colors. No tertiary colors. Just four colors and infinite combinations.
+### Yellow
+Pure energy. That "don't touch the stove" feeling. Maximum visibility.
 
-## Why It Works
+### Pink
+Movement. Pulse. Synthwave dreams. All of it.
 
-High contrast means high readability. When you're flying down a rail at 200 BPM, you don't have time to squint at subtle gradients.
+### Blue
+Depth. Cool moments. The other side of the tracks.
 
-You need to **see** the gap. You need to **feel** the edge.
+That's the whole palette. No secondary colors. No fancy gradients. Just four colors that hate each other in the best way.
 
-## The Glitch Aesthetic
+## You Need to See Everything
 
-See those little visual hiccups? The chromatic aberration? The screen shake on big combos?
+Here's the practical reason:
 
-Those aren't bugs. They're **features**.
+When you're flying down a rail at stupid speeds, you don't have time to squint at subtle design choices.
 
-We want the game to feel unstable – in a good way. Like it could break at any moment. Like you're pushing the system to its limit.
+You need to see the gap. You need to feel the edge. You need to know exactly where you're going or you're going to eat it.
 
-Because you are.
+High contrast = high readability = fewer face-plants.
 
-## Every Pixel is Intentional
+## The Glitch Thing
 
-We mentioned this in our manifesto, but it's worth repeating:
+Those visual hiccups? The screen shake? The chromatic aberration?
 
-**Every pixel is intentional. Every frame is hand-tweaked.**
+Yeah, that's on purpose.
 
-Nothing is "good enough." If a transition doesn't feel perfect, we redo it. If a color feels slightly off, we tweak it. If a particle effect doesn't spark joy, we delete it and start over.
+We want it to feel like the game could break at any moment. Like you're pushing everything to the limit. Because honestly, you probably are.
 
-## The Animation Playground
+## Joana Makes Everything Look Sick
 
-As animators, this is our playground.
+Real talk – I do the design and direction, but Joana's the one who actually makes all of this look good.
 
-The skater doesn't just move – they **flow**. Every trick is a carefully crafted sequence of keyframes that we've obsessed over for weeks.
+Every particle effect, every glow, every single visual detail? That's her. She's obsessed with it.
 
-The city doesn't just sit there – it **breathes**. Buildings pulse. Rails glow. The ground itself seems to vibrate with potential energy.
+Nothing ships until it feels right.
 
-## It Never Plays the Same Way Twice (Visually Too)
+## Performance Matters Though
 
-Because the levels are procedurally generated, the visual experience is different every time.
+Cool visual effects mean nothing if the game runs at 12 FPS.
 
-Sometimes the city is a maze of tight corridors. Sometimes it's an open playground of endless lines. Sometimes it's pure chaos.
+We'd rather have 60 FPS on a regular laptop than ray-traced reflections on a NASA computer that costs more than a car.
 
-And we love that.
+So we optimize. We pre-bake. We cheat in smart ways.
 
-## Performance vs. Pretty
+The goal is: looks incredible, runs everywhere.
 
-Here's the technical reality – we want this game to run on potatoes.
+## It Changes Every Time
 
-Sure, we could ray-trace every reflection. We could simulate individual photons. We could make your GPU cry.
+Since the levels are procedurally generated, the visuals are always different.
 
-But we'd rather have 60 FPS on a laptop than cinematic screenshots on a supercomputer.
+Sometimes it's tight corridors. Sometimes it's wide open chaos. Sometimes it's this perfect flow state where everything just works.
 
-So we cheat. We use smart lighting. We pre-bake what we can. We optimize until it hurts.
+That's the magic.
 
-The result? A game that looks incredible without needing a NASA computer.
+## More to Come
 
-## Style Over Substance (Actually Both)
+We're not done with the art direction. Not even close.
 
-We believe you don't have to choose between great gameplay and great art.
+Street art collabs? Maybe.
+Weather that reacts to the music? Absolutely.
+Secret visual areas that only unlock at perfect flow states? Would be cool if they existed, huh?
 
-Skate Beats has both. The art serves the gameplay. The gameplay enhances the art.
-
-It's a virtuous cycle of awesome.
-
-## Join the Neon Revolution
-
-This is just the beginning. We have so many more visual ideas to explore.
-
-Street art collaborations? Maybe.
-Dynamic weather that changes with the music? Absolutely.
-Secret areas that only unlock when you hit certain flow states? Wouldn't you like to know.
-
-**Wishlist now and get ready to glow.**
+**Wishlist it if you want to see how far we take this aesthetic.**
 
 ---
 
-*P.S. Yes, the website has the same aesthetic. Yes, we spent way too much time on those falling blocks. No, we're not sorry.*
+*P.S. Yes, the website has the same vibe. Yes, we spent way too long on those falling blocks. No regrets.*
