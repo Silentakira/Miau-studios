@@ -1,0 +1,232 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CursorGlow from '../components/CursorGlow.astro';
+
+const { title, date, category, excerpt } = Astro.props;
+---
+
+<BaseLayout title={`Miau Studio | ${title}`}>
+  <CursorGlow />
+  <Nav />
+
+  <article class="blog-post container">
+    <a href="/#blog" class="back-link cursor-interact" data-cursor="VIEW">← Back to Blog</a>
+
+    <header class="blog-header">
+      <span class="blog-category">{category}</span>
+      <h1 class="blog-title">{title}</h1>
+      <p class="blog-excerpt">{excerpt}</p>
+      <time class="blog-date">{new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+    </header>
+
+    <div class="blog-content">
+      <slot />
+    </div>
+
+    <footer class="blog-footer">
+      <div class="footer-cta">
+        <h2>Ready to Skate?</h2>
+        <p>Wishlist Skate Beats and be the first to know when we drop.</p>
+        <a href="#game" class="btn btn-filled cursor-interact" data-cursor="WISHLIST">Wishlist Now</a>
+      </div>
+    </footer>
+  </article>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-post {
+    padding-top: clamp(80px, 15vw, 160px);
+    padding-bottom: clamp(80px, 15vw, 160px);
+    max-width: 800px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--pink);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover {
+    transform: translateX(-5px);
+  }
+
+  .blog-header {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+
+  .blog-category {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--black);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .blog-excerpt {
+    font-size: 1.25rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+  }
+
+  .blog-date {
+    display: block;
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 500;
+  }
+
+  .blog-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--black);
+  }
+
+  .blog-content :global(h2) {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 800;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .blog-content :global(h3) {
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .blog-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-content :global(strong) {
+    font-weight: 800;
+    color: var(--pink);
+  }
+
+  .blog-content :global(em) {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .blog-content :global(a) {
+    color: var(--pink);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+  }
+
+  .blog-content :global(a:hover) {
+    color: var(--blue);
+  }
+
+  .blog-content :global(ul),
+  .blog-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+
+  .blog-content :global(li) {
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-content :global(code) {
+    background: var(--yellow);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+
+  .blog-content :global(blockquote) {
+    border-left: 4px solid var(--pink);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: #666;
+  }
+
+  .blog-footer {
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 2px solid var(--black);
+  }
+
+  .footer-cta {
+    text-align: center;
+  }
+
+  .footer-cta h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .footer-cta p {
+    font-size: 1.125rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .blog-content {
+      font-size: 1rem;
+    }
+
+    .footer-cta h2 {
+      font-size: 1.5rem;
+    }
+
+    .footer-cta p {
+      font-size: 1rem;
+    }
+
+    .footer-cta .btn {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>
+
+<script>
+  // Smooth scroll back to blog section
+  document.querySelector('.back-link')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = '/#blog';
+  });
+</script>
