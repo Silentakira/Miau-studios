@@ -8,14 +8,14 @@
   <div class="team-profiles reveal-stagger">
     <div class="team-profile">
       <div class="profile-circle profile-img-wrap profile-akira cursor-interact" data-cursor="VIEW">
-          <div class="placeholder-label">Akira</div>
+          <img src="/akira-profile.jpg" alt="Akira - Art Director & Animator" class="profile-img" />
       </div>
       <h4 class="profile-name">Akira</h4>
       <p class="profile-role">Art Director & Animator</p>
     </div>
     <div class="team-profile">
       <div class="profile-circle profile-img-wrap profile-joana cursor-interact" data-cursor="VIEW">
-          <div class="placeholder-label">Joana</div>
+          <img src="/joana-profile.jpg" alt="Joana - Lead Animator & Chaos Engine" class="profile-img" />
       </div>
       <h4 class="profile-name">Joana</h4>
       <p class="profile-role">Lead Animator & Chaos Engine</p>
@@ -77,11 +77,12 @@
     overflow: visible;
   }
 
-  .placeholder-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #888;
-      text-transform: uppercase;
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
   }
 
   .profile-circle::after {
@@ -184,6 +185,13 @@
       height: 160px;
       flex-shrink: 0;
       margin-bottom: 0;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
 
     .profile-name {
